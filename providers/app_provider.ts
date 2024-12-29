@@ -1,35 +1,34 @@
 import type { ApplicationService } from '@adonisjs/core/types'
-import { Inerti}
 
 export interface HttpContext {
-  language: Language;
+    language: Language
 }
 
 export default class AppProvider {
-  constructor(protected app: ApplicationService) {}
+    constructor(protected app: ApplicationService) {}
 
-  /**
-   * Register bindings to the container
-   */
-  register() {}
+    /**
+     * Register bindings to the container
+     */
+    register() {}
 
-  /**
-   * The container bindings have booted
-   */
-  async boot() {}
+    /**
+     * The container bindings have booted
+     */
+    async boot() {}
 
-  /**
-   * The application has been booted
-   */
-  async start() {}
+    /**
+     * The application has been booted
+     */
+    async start() {}
 
-  /**
-   * The process has been started
-   */
-  async ready() {}
+    /**
+     * The process has been started
+     */
+    async ready() {}
 
-  /**
-   * Preparing to shutdown the app
-   */
-  async shutdown() {}
+    /**
+     * Preparing to shutdown the app
+     */
+    async shutdown() {}
 }
