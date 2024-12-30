@@ -9,6 +9,6 @@
     <div class="flex flex-col gap-5 pointer-events-auto">
         <Title title={$t('forbidden.title')} />
         <Subtitle>{$t('forbidden.subtitle')}</Subtitle>
-        <BackTo href="/" text={$t('common.back-to-home')} />
+        <BackTo href="/login" text={$t('menu.login')} />
     </div>
 </div>

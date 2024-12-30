@@ -65,11 +65,11 @@
         <Menu />
         {#if !$isLoading}
             <Router {url}>
-                <Route path="/"><Homepage /></Route>
                 <Route path="/reset-password"><ResetPassword /></Route>
                 <Route path="/reset-password/confirm/:token" let:params><ConfirmResetPassword {...params} /></Route>
 
                 {#if $profile}
+                    <Route path="/"><Homepage /></Route>
                     <Route path="/login"><AlreadyConnected /></Route>
 
                     <Route path="/profile"><Profile /></Route>
@@ -77,6 +77,7 @@
                 {:else}
                     <Route path="/login"><Login /></Route>
 
+                    <Route path="/"><Forbidden /></Route>
                     <Route path="/profile"><Forbidden /></Route>
                     <Route path="/logout"><Forbidden /></Route>
                 {/if}

@@ -4,10 +4,10 @@ import { compose } from '@adonisjs/core/helpers';
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid';
 import type { BelongsTo } from '@adonisjs/lucid/types/relations';
-import RoleEnum from '#types/enum/role_enum';
 import SerializedUser from '#types/serialized/serialized_user';
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens';
 import File from '#models/file';
+import UserRoleEnum from "#types/enum/user_role_enum";
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
     uids: ['email'],
@@ -31,7 +31,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
     declare creationToken: string | null;
 
     @column()
-    declare role: RoleEnum;
+    declare role: UserRoleEnum;
 
     @column()
     declare enabled: boolean;

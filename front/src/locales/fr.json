@@ -1,31 +1,12 @@
 {
     "common": {
-        "tassadraft": "Tassadraft",
-        "tassacards": "Tassacards",
-        "tassadecks": "Tassadecks",
         "yes": "Oui",
         "no": "Non",
         "language": "Langue",
-        "coming-soon": "Bientôt disponible ...",
         "close": "Fermer",
         "close-modal": "Fermer la fenêtre",
         "cancel": "Annuler",
         "back-to-home": "Retour à la page d'accueil",
-        "contact": "Contact",
-        "address": "Adresse",
-        "delete": "Supprimer",
-        "public": "Public",
-        "enabled": "Activé",
-        "actions": "Actions",
-        "download": "Télécharger",
-        "legal": "Légal",
-        "not-legal": "Non légal",
-        "updated-on": "Mis à jour le",
-        "created-on": "Créé le",
-        "card": {
-            "one": "carte",
-            "other": "cartes"
-        },
         "search": "Rechercher",
         "name": "Nom",
         "username": {
@@ -55,15 +36,9 @@
         "file": {
             "title": "Sélectionnez un fichier",
             "description": "Glissez-déposez ou cliquez pour sélectionner un fichier."
-        },
-        "edit-deck": "Modifier le deck",
-        "view-product": "Voir le produit"
+        }
     },
     "toast": {
-        "terms-and-conditions": {
-            "success": "Conditions générales d'utilisation acceptées",
-            "error": "Une erreur est survenue lors de l'acceptation des conditions générales d'utilisation"
-        },
         "login": {
             "success": "Vous êtes maintenant connecté",
             "error": "Identifiants invalides"
@@ -71,16 +46,6 @@
         "logout": {
             "success": "Vous êtes maintenant déconnecté",
             "error": "Une erreur est survenue lors de la déconnexion"
-        },
-        "contact": {
-            "success": "Formulaire de contact soumis avec succès",
-            "error": "Une erreur est survenue lors de la soumission du formulaire de contact"
-        },
-        "photo": {
-            "deleted": "Photo supprimée",
-            "restored": "Photo restaurée",
-            "unauthorized": "Vous n'êtes pas autorisé à traiter les photos",
-            "error": "Une erreur s'est produite lors du traitement des photos"
         },
         "reset-password": {
             "mail": {
@@ -100,65 +65,6 @@
                 "success": "Profil mis à jour",
                 "error": "Une erreur est survenue lors de la mise à jour du profil"
             }
-        },
-        "editor": {
-            "load": {
-                "error": "Erreur lors du chargement du deck"
-            },
-            "legality": {
-                "error": "Erreur lors de la vérification de la légalité du deck"
-            },
-            "search": {
-                "error": "Erreur lors de la recherche"
-            },
-            "card-prints": {
-                "error": "Erreur lors de la récupération des versions de la carte"
-            },
-            "add-category": {
-                "success": "Catégorie créée",
-                "error": "Error lors de la création de la catégorie"
-            }
-        },
-        "create-account": {
-            "send-mail": {
-                "success": "Un mail a été envoyé à votre adresse email pour confirmer la création de votre compte",
-                "error": "Une erreur est survenue lors de l'envoi du mail : réessayez ultérieurement"
-            },
-            "confirm": {
-                "success": "Votre compte a été créé : Vous êtes maintenant connecté",
-                "error": "Une erreur est survenue lors de la finalisation de la création du compte"
-            }
-        },
-        "subscribe": {
-            "success": {
-                "success": "Vous êtes maintenant abonné à Tassadapi",
-                "error": "Une erreur est survenue lors de l'abonnement à Tassadapi"
-            },
-            "cancel-session": {
-                "success": "Session d'abonnement annulée",
-                "error": "Une erreur est survenue lors de l'annulation de la session d'abonnement"
-            },
-            "cancel": {
-                "success": "Abonnement annulé",
-                "error": "Une erreur est survenue lors de l'annulation de l'abonnement"
-            }
-        }
-    },
-    "badge": {
-        "in-deck": "Dans le deck",
-        "banned": "Banni",
-        "current": "Actuel"
-    },
-    "table": {
-        "card": {
-            "set": "Édition",
-            "foil": "Brillante",
-            "price": "Prix"
-        },
-        "deck": {
-            "format": "Format",
-            "cards": "Cartes",
-            "owner": "Propriétaire"
         }
     },
     "menu": {
@@ -167,20 +73,11 @@
         "profile": "Profil",
         "logout": "Déconnexion",
         "login": "Connexion",
-        "legals": "Mentions légales",
-        "terms-and-conditions": "Conditions générales d'utilisation",
-        "contact": "Contact",
-        "source-code": "Code source",
-        "subscribe": "S'abonner"
+        "source-code": "Code source"
     },
     "settings": {
         "title": "Paramètres",
         "theme": "Thème",
-        "currency": {
-            "title": "Devise",
-            "euro": "Euro (€)",
-            "dollar": "Dollar ($)"
-        },
         "language": {
             "title": "Langue préférée"
         }
@@ -191,12 +88,7 @@
         "profile-picture": {
             "title": "Photo de profil",
             "description": "Uploadez ici une photo de phofil"
-        },
-        "subscription": "Abonnement",
-        "subscription-ends": "Abonnement se termine le",
-        "subscribed-on": "Abonné le",
-        "subscribe": "S'abonner",
-        "last-subscription": "Fin du dernier abonnement"
+        }
     },
     "reset-password": {
         "title": "Réinitialiser le mot de passe",
@@ -204,46 +96,8 @@
             "title": "Finaliser la réinitialisation du mot de passe"
         }
     },
-    "subscribe": {
-        "title": "S'abonner",
-        "product": {
-            "free": "Gratuit",
-            "subscribe": "S'abonner",
-            "day": "jour",
-            "month": "mois",
-            "months": "mois",
-            "year": "an",
-            "learn-more": "Lire plus",
-            "details": {
-                "title": "Chargement du produit ...",
-                "already subscribed": "Déjà abonné",
-                "cancel": {
-                    "title": "Annuler l'abonnement",
-                    "text": "Êtes-vous sûr de vouloir annuler l'abonnement actif ?"
-                }
-            }
-        },
-        "success": {
-            "title": "Abonné avec succès"
-        },
-        "cancel-session": {
-            "title": "Session d'abonnement annulée"
-        },
-        "error": {
-            "title": "Quelque chose s'est mal passé"
-        }
-    },
     "home": {
-        "title": "Accueil",
-        "tassadraft": {
-            "description": "Votre outil de reconnaissance de cartes en lot"
-        },
-        "tassacards": {
-            "description": "Bientôt disponible ..."
-        },
-        "tassadecks": {
-            "description": "Votre éditeur de deck dédié"
-        }
+        "title": "Accueil"
     },
     "login": {
         "title": "Connexion"
@@ -255,307 +109,14 @@
             "text": "Êtes-vous sûr de vouloir vous déconnecter ?"
         }
     },
-    "contact": {
-        "title": "Contact",
-        "subject": {
-            "label": "Sujet",
-            "new-feature": "Nouvelle fonctionnalité",
-            "suggestion": "Suggestion",
-            "question": "Question",
-            "help": "Aide",
-            "feedback": "Retour",
-            "customer-support": "Support consommateurs",
-            "business": "Professionnel",
-            "other": "Autre"
-        },
-        "message": {
-            "label": "Message",
-            "placeholder": "Bonjour, comment pourrais-je aider Tassadraft ?"
-        },
-        "consent": "J’accepte le traitement de mes données personnelles dans le but de répondre à ma demande, conformément à la Politique de Confidentialité."
-    },
-    "legals": {
-        "title": "Mentions Légales",
-        "editor": {
-            "title": "Éditeur",
-            "legal-status": "Statut Juridique",
-            "siret": "SIRET",
-            "self-employed-business": "Auto-entreprise",
-            "responsible": "Responsable"
-        },
-        "hosting": {
-            "title": "Hébergement",
-            "host": "Hébergeur",
-            "address": "Adresse",
-            "rcs": "RCS",
-            "capital": "Capital Social",
-            "ape-code": "Code APE",
-            "vat-number": "N° TVA",
-            "datacenter": "Datacenter"
-        },
-        "intellectual-property": {
-            "title": "Propriété Intellectuelle",
-            "description": "L'application Tassadraft et ses contenus (textes, images, logos) sont protégés par le droit d'auteur. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite est interdite.",
-            "disclaimer": "Magic: The Gathering est une marque déposée de Wizards of the Coast. Tassadraft n'est ni affiliée, ni approuvée par Wizards of the Coast."
-        },
-        "personal-data": {
-            "title": "Données Personnelles",
-            "description": "Les informations collectées via l'application sont destinées à la gestion des abonnements et à l'amélioration des services.",
-            "rights": "Conformément à la loi «Informatique et Libertés» et au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données.",
-            "contact": "Pour exercer ces droits, contactez-nous à l'adresse suivante :"
-        },
-        "terms-of-use": {
-            "title": "Conditions Générales d'Utilisation (CGU)",
-            "description": "L'utilisation de l'application implique l'acceptation des CGU disponibles sur notre site.",
-            "details": [
-                "Les services de reconnaissance de cartes et de gestion de decks sont accessibles via un abonnement payant.",
-                "Les tarifs et modalités sont détaillés dans les CGU."
-            ]
-        },
-        "responsibility": {
-            "title": "Responsabilité",
-            "description": "Tassadraft s'efforce d'assurer l'exactitude des informations diffusées. Toutefois, elle ne saurait être tenue responsable des erreurs ou omissions, ni des conséquences de l'utilisation de ces informations."
-        },
-        "hyperlinks": {
-            "title": "Liens Hypertextes",
-            "description": "L'application peut contenir des liens vers des sites tiers. Tassadraft n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu."
-        },
-        "applicable-law": {
-            "title": "Droit Applicable",
-            "description": "Les présentes mentions légales sont soumises au droit français. En cas de litige, et après échec de toute tentative de résolution amiable, les tribunaux français seront seuls compétents."
-        }
-    },
-    "terms-and-conditions": {
-        "title": "Conditions générales d'utilisation",
-        "accept": "J'accepte les conditions",
-        "object": {
-            "title": "1. Objet des CGU",
-            "description": "Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation de l'application Tassadraft, accessible via le web et les plateformes mobiles. En utilisant l'application ou les services associés, vous acceptez intégralement ces CGU."
-        },
-        "description": {
-            "title": "2. Description des services",
-            "description": "Tassadraft est une plateforme pour les amateurs de Magic: The Gathering (MTG) qui propose :",
-            "details": [
-                "Reconnaissance de cartes MTG à partir de photos (traitement par lot inclus).",
-                "Gestion et édition de decks, avec support de plusieurs formats et téléchargement personnalisé avec choix des éditions.",
-                "Tassadapi, une API propriétaire ouverte, dont la documentation est disponible sur https://docs.tassadraft.com."
-            ],
-            "open-source": {
-                "title": "2.1. Open-source",
-                "description": "Les applications mobile et web sont des clients open-source développés avec Svelte et construites à l'aide de Capacitor.\nLe code source est disponible publiquement sous licence MIT sur https://github.com/Tassadraft/Tassadraft-v2.\nToute contribution ou réutilisation du code doit respecter les termes de la licence MIT."
-            }
-        },
-        "access": {
-            "title": "3. Modalités d'accès",
-            "object": [
-                "Web : Les fonctionnalités complètes (paiement inclus) sont accessibles depuis la version web de l'application.",
-                "Mobile : L'application mobile offre des fonctionnalités similaires, à l'exception des paiements, qui sont uniquement disponibles via la version web.",
-                "L'application nécessite une connexion Internet. L'utilisateur est responsable de la configuration de son appareil pour accéder aux services."
-            ]
-        },
-        "subscription": {
-            "title": "4. Modalités d'abonnement",
-            "description": "L’accès aux services de Tassadraft est soumis à un abonnement payant, avec les options suivantes :",
-            "object": [
-                "Essai gratuit : 24 heures.",
-                "Abonnement mensuel : 3,99 € pour 1 mois.",
-                "Abonnement trimestriel : 9,99 € pour 3 mois.",
-                "Abonnement semestriel : 16,99 € pour 6 mois.",
-                "Abonnement annuel : 29,99 € pour 12 mois."
-            ],
-            "payment": {
-                "title": "4.1. Paiement",
-                "description": "Les paiements s’effectuent uniquement via la version web de l'application, à l'aide des options sécurisées proposées.\nLes prix incluent toutes taxes applicables."
-            },
-            "end-subscription": {
-                "title": "4.2. Renouvellement et annulation",
-                "renew": "Les abonnements sont reconduits automatiquement sauf annulation par l'utilisateur au moins 24 heures avant la date de renouvellement.",
-                "cancel": "L'annulation ne donne pas droit à un remboursement pour la période en cours."
-            }
-        },
-        "tassadapi": {
-            "title": "5. API Tassadapi",
-            "description": "Tassadapi est une API propriétaire ouverte permettant d’interagir avec les services de Tassadraft. Sa documentation est accessible sur https://docs.tassadraft.com.\nL’accès et l’utilisation de l’API doivent se conformer aux restrictions d’usage précisées dans la documentation et respecter les droits de propriété intellectuelle."
-        },
-        "user-responsibility": {
-            "title": "6. Responsabilités de l'utilisateur",
-            "description": "L'utilisateur s'engage à :",
-            "object": [
-                "Respecter les lois en vigueur, notamment les droits de propriété intellectuelle.",
-                "Ne pas utiliser l'application ou l'API de manière frauduleuse ou nuisible (piratage, abus de l’API, etc.).",
-                "Fournir des informations exactes lors de l'inscription."
-            ]
-        },
-        "intellectual-propriety": {
-            "title": "7. Propriété intellectuelle",
-            "api": "API Tassadapi : Tassadapi est une propriété exclusive de Tassadraft. Toute utilisation abusive, reproduction non autorisée, ou distribution des fonctionnalités de l'API est interdite.",
-            "clients": "Clients web et mobile : Les applications étant open-source, elles sont distribuées sous licence MIT. Les utilisateurs doivent respecter les termes de cette licence en cas de modification ou redistribution."
-        },
-        "app-responsibility": {
-            "title": "8. Limitation de responsabilité",
-            "description": "Tassadraft met tout en œuvre pour garantir une expérience optimale, mais ne garantit pas :",
-            "object": [
-                "Une disponibilité continue des services.",
-                "L’absence d’erreurs ou de bugs dans l’application.",
-                "Une compatibilité avec tous les appareils ou navigateurs."
-            ],
-            "tassadraft-not-responsible": "Tassadraft ne pourra être tenu responsable des pertes de données, interruptions de service, ou dommages indirects liés à l’utilisation des services."
-        },
-        "data": {
-            "title": "9. Traitement des données personnelles",
-            "collected": {
-                "title": "9.1. Données collectées",
-                "object": [
-                    "Informations fournies par l’utilisateur lors de l'inscription (email, nom, etc.).",
-                    "Données liées à l'utilisation des fonctionnalités (decks créés, formulaire de contact)."
-                ]
-            },
-            "goals": {
-                "title": "9.2. Finalités",
-                "object": ["Améliorer l'expérience utilisateur.", "Gérer les abonnements.", "Analyser l'utilisation pour optimiser les services."],
-                "details": "Pour plus de détails, consultez notre [Politique de Confidentialité]."
-            }
-        },
-        "contributions": {
-            "title": "10. Contributions et open-source",
-            "description": "Si un utilisateur contribue au code source des clients open-source via GitHub, il accepte de céder les droits nécessaires à Tassadraft conformément aux termes de la licence MIT. Tassadraft se réserve le droit de refuser ou de modifier une contribution."
-        },
-        "support": {
-            "title": "11. Support",
-            "description": "Pour toute question, assistance ou réclamation, remplissez le formulaire de contact, ou à défaut contactez-nous à l'adresse suivante : tassadapi@tassadraft.com."
-        },
-        "cancellation": {
-            "title": "12. Résiliation",
-            "description": "Tassadraft se réserve le droit de suspendre ou résilier l'accès à l'application et à l’API en cas de non-respect des CGU."
-        },
-        "update": {
-            "title": "13. Modifications des CGU",
-            "description": "Les présentes CGU peuvent être modifiées à tout moment. Toute modification sera notifiée via l'application ou le site web. En continuant à utiliser les services après la notification, vous acceptez les nouvelles CGU."
-        },
-        "right": {
-            "title": "14. Droit applicable et juridiction compétente",
-            "description": "Les présentes CGU sont régies par le droit français. Tout litige sera soumis aux tribunaux compétents en France."
-        }
-    },
-    "tassadraft": {
-        "photos": "Photos",
-        "cards": "Cartes",
-        "no-photo": "Aucune photo disponible",
-        "process": {
-            "modal": {
-                "title": "Traitement des photos",
-                "text": "Certaines photos semblent ne pas encore être traitées.",
-                "question": "Voulez-vous les traiter ?"
-            }
-        }
-    },
-    "tassadecks": {
-        "owned-decks": {
-            "one": "deck possédé",
-            "other": "decks possédés"
-        },
-        "public-decks": {
-            "one": "deck public",
-            "other": "decks publics"
-        },
-        "delete-deck": "Êtes-vous sûr de vouloir supprimer ",
-        "new": {
-            "title": "Nouveau deck",
-            "card": {
-                "title": "Nouveau deck",
-                "description": "Créez un nouveau deck à partir de zéro ou en important un fichier"
-            },
-            "form": {
-                "name": {
-                    "label": "Nom",
-                    "placeholder": "Mono rouge aggro"
-                },
-                "description": {
-                    "label": "Description",
-                    "placeholder": "Ceci est un deck aggro censé gagner en 5 tours."
-                },
-                "file": {
-                    "title": "Importer un fichier de liste de deck",
-                    "description": "L'export Archidekt est supporté\nFormat de ligne :\n<[quantité]x [nom de la carte anglaise] [...]>"
-                }
-            }
-        },
-        "my-decks": {
-            "title": "Choisissez un deck à modifier",
-            "card": {
-                "title": "Modifier un deck",
-                "description": "Modifiez l'un de vos decks, ou un qui a été partagé avec vous"
-            }
-        },
-        "browse": {
-            "title": "Parcourir tous les decks",
-            "card": {
-                "title": "Parcourir tous les decks",
-                "description": "Parcourez tous les decks publics, partagés avec vous, et vos propres decks"
-            }
-        },
-        "editor": {
-            "switch-print": "Changer édition",
-            "choose-print": "Choisir édition",
-            "new-category": {
-                "title": "Nouvelle catégorie",
-                "placeholder": "Stase",
-                "label": "Entrez un nom de catégorie"
-            },
-            "detailed-categories": "Catégories détaillées",
-            "visuals": {
-                "help": "Cette catégorie sert à choisir une illustration au deck en addition des commandants : si plusieurs cartes sont présentes alors une aléatoire sera choisie"
-            },
-            "related-cards": {
-                "title": "Cartes liées",
-                "description": "Ces cartes ne sont pas comptabilisées dans les cartes du deck.",
-                "base-cards": "Cartes du deck liées"
-            },
-            "batch": {
-                "photo": "Ajout multiple (photo)",
-                "text": "Ajout multiple (texte)"
-            },
-            "search": {
-                "title": "Rechercher des cartes",
-                "label": "Rechercher des cartes par nom",
-                "placeholder": "Forêt",
-                "already": "Carte déjà dans le deck"
-            },
-            "download": {
-                "modal": {
-                    "title": "Options de téléchargement",
-                    "confirm": "Continuer",
-                    "switch": {
-                        "title": "Sélectionnez ce que vous voulez télécharger",
-                        "deck-cards": "Cartes du deck",
-                        "related-cards": "Cartes liées",
-                        "tokens": "Jetons",
-                        "emblems": "Emblèmes",
-                        "other-cards": "Autres cartes liées"
-                    }
-                }
-            },
-            "clear-categories": {
-                "title": "Nettoyer catégories",
-                "text": "Êtes-vous sûr de vouloir supprimer les catégories sans cartes ? Cette action n'est pas réversible."
-            }
-        }
-    },
     "forbidden": {
         "title": "Accès refusé",
-        "subtitle": "Vous devez êtez connecté et abonné pour accéder à cette partie de l'application."
+        "subtitle": "Vous devez êtez connecté pour accéder à cette partie de l'application."
     },
     "not-found": {
         "title": "Page inexistante"
     },
     "already-connected": {
         "title": "Déjà connecté"
-    },
-    "create-account": {
-        "title": "Créer un nouveau compte",
-        "consent": "J’ai lu et j’accepte les Conditions Générales d’Utilisation.",
-        "confirm": {
-            "title": "Confirmer la création du compte"
-        }
     }
 }
