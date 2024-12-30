@@ -1,4 +1,4 @@
-import BaseRepository from '#repositories/Base/base_repository';
+import BaseRepository from '#repositories/base/base_repository';
 import File from '#models/file';
 import { inject } from '@adonisjs/core';
 

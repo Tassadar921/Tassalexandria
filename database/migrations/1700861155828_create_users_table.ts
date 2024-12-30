@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import { BaseSchema } from '@adonisjs/lucid/schema';
-import RoleEnum from '#types/enum/role_enum';
+import UserRoleEnum from '#types/enum/user_role_enum';
 
 export default class extends BaseSchema {
     protected tableName: string = 'users';
@@ -13,8 +13,8 @@ export default class extends BaseSchema {
             table.string('password', 255).notNullable();
             table.string('creation_token', 255).nullable();
             table.boolean('enabled').defaultTo(false);
-            table.enum('role', Object.values(RoleEnum)).notNullable().defaultTo(RoleEnum.USER);
-            table.string('remember_me_token').nullable();
+            table.enum('role', Object.values(UserRoleEnum)).notNullable().defaultTo(UserRoleEnum.FRIEND);
+            table.uuid('file_id').nullable().references('id').inTable('files');
             table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now());
             table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now());
         });
