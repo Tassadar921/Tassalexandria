@@ -1,15 +1,17 @@
-# Tassadapi v2.2
+# Tassalexandria
 
-### Framework : Adonisjs 6.14.1
+### Front : Svelte 4
+
+### Back : Adonisjs 6.14.1
 
 ### Database : PostgreSQL
 
 ### ORM : Lucid
 
-https://tassalexandria.com (à commander)
+https://tassalexandria.fr (incoming)
 
 ### Links
 
 - #### Tassadapi
 
-    - [Production](https://tassalexandria.com)
+    - [Production](https://tassalexandria.fr)
