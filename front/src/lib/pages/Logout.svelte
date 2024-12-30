@@ -12,7 +12,7 @@
 
     const handleSuccess = async () => {
         try {
-            await axios.get('/api/auth/logout');
+            await axios.get('/api/logout');
             localStorage.removeItem('apiToken');
             localStorage.removeItem('subscribed');
             clearProfile();

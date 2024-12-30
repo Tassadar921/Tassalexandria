@@ -23,7 +23,7 @@
         };
 
         if ($profile.profilePicture) {
-            path = `/api/auth/profile/profile-picture/${$profile.profilePicture?.name}`;
+            path = `/api/profile/profile-picture/${$profile.profilePicture?.name}`;
         }
     });
 
@@ -45,7 +45,7 @@
 
 <Title title={$t('profile.title')} hasBackground={true}/>
 
-<Form action="/api/auth/profile/update" method="POST" on:success={handleSuccess} on:error={handleError} bind:isValid>
+<Form action="/api/profile/update" method="POST" on:success={handleSuccess} on:error={handleError} bind:isValid>
     <Input
         name="username"
         placeholder={$t('common.username.label')}

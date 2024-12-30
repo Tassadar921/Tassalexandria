@@ -21,13 +21,6 @@
 
         await updateProfile(event.detail.user);
 
-        // Subscription
-        try {
-            await axios.get('/api/auth/reserved');
-            localStorage.setItem('subscribed', 'true');
-        } catch (error) {
-            localStorage.setItem('subscribed', 'false');
-        }
         showToast($t('toast.login.success'));
         navigate('/');
     };

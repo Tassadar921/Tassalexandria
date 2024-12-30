@@ -3,6 +3,7 @@ import { middleware } from '#start/kernel';
 
 const AuthController = () => import('#controllers/auth_controller');
 const ProfileController = () => import('#controllers/profile_controller');
+const FileUploadController = () => import('#controllers/file_upload_controller');
 
 // API requests
 router
@@ -17,20 +18,14 @@ router
 
         router
             .group((): void => {
-                router.post('/send-mail', [AuthController, 'sendAccountCreationEmail']);
-                router.get('/confirm/:token', [AuthController, 'confirmAccountCreation']);
-            })
-            .prefix('account-creation');
-
-        router.get('/logout', [AuthController, 'logout']);
-
-
-
-        router
-            .group((): void => {
                 router.get('/', (): { sessionTokenIsValid: boolean } => {
                     return { sessionTokenIsValid: true };
                 });
+
+                router.get('/logout', [AuthController, 'logout']);
+
+                router.get('/tags', [FileUploadController, 'getTags']);
+                router.post('/upload', [FileUploadController, 'upload']);
 
                 router
                     .group((): void => {
@@ -39,7 +34,6 @@ router
                     })
                     .prefix('profile');
             })
-            .prefix('auth')
             .use([middleware.auth({ guards: ['api'] })]);
     })
     .prefix('api')

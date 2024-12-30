@@ -30,7 +30,7 @@
         }
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         axios
-            .get('/api/auth')
+            .get('/api')
             .then((response) => {
                 if (response.status !== 200) {
                     throw new Error('Invalid token');

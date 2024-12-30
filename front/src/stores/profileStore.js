@@ -10,7 +10,7 @@ export function setProfile(user) {
 export async function updateProfile(profile = null) {
     try {
         if (!profile) {
-            const { data: fetchedProfile } = await axios.get('/api/auth/profile');
+            const { data: fetchedProfile } = await axios.get('/api/profile');
             profile = fetchedProfile.user;
         }
         setProfile(profile);

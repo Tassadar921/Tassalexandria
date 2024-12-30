@@ -1,13 +1,14 @@
 import { DateTime } from 'luxon';
 import hash from '@adonisjs/core/services/hash';
 import { compose } from '@adonisjs/core/helpers';
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
+import {BaseModel, belongsTo, column, hasMany} from '@adonisjs/lucid/orm';
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid';
-import type { BelongsTo } from '@adonisjs/lucid/types/relations';
+import type {BelongsTo, HasMany} from '@adonisjs/lucid/types/relations';
 import SerializedUser from '#types/serialized/serialized_user';
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens';
 import File from '#models/file';
 import UserRoleEnum from "#types/enum/user_role_enum";
+import UploadedFile from "#models/uploaded_file";
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
     uids: ['email'],
@@ -41,6 +42,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
     @belongsTo(() => File)
     declare profilePicture: BelongsTo<typeof File>;
+
+    @hasMany((): typeof UploadedFile => UploadedFile)
+    declare uploadedFiles: HasMany<typeof UploadedFile>;
 
     @column.dateTime({ autoCreate: true })
     declare createdAt: DateTime;
