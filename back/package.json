@@ -7,7 +7,7 @@
     "scripts": {
         "start": "node bin/server.js",
         "install:prod": "rm -rf node_modules && rm package-lock.json && npm install --only=prod",
-        "build": "[ -d build/public ] && cp -r build/public tmp && node ace build && cp -r public build && cp .env build/.env && cd build && npm run install:prod && pm2 stop tassadapi || true && pm2 delete tassadapi || true && pm2 start bin/server.js --name tassadapi && cd ../ && rsync -av --progress tmp/ build/public/ && rm -rf tmp",
+        "build": "[ -d build/public ] && cp -r build/public tmp && node ace build && cp -r public build && cp .env build/.env && cd build && npm run install:prod && pm2 stop tassalexandria || true && pm2 delete tassalexandria || true && pm2 start bin/server.js --name tassalexandria && cd ../ && rsync -av --progress tmp/ build/public/ && rm -rf tmp",
         "dev": "node ace serve --hmr",
         "test": "node ace test",
         "format": "prettier --write ."
