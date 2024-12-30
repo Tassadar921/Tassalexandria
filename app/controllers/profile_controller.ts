@@ -12,6 +12,7 @@ import File from '#models/file';
 import app from '@adonisjs/core/services/app';
 import { cuid } from '@adonisjs/core/helpers';
 import FileService from '#services/file_service';
+import SlugifyService from '#services/slugify_service';
 import RegexService from '#services/regex_service';
 
 @inject()
@@ -21,6 +22,7 @@ export default class ProfileController {
         private readonly resetPasswordRepository: ResetPasswordRepository,
         private readonly mailService: BrevoMailService,
         private readonly fileService: FileService,
+        private readonly slugifyService: SlugifyService,
         private readonly regexService: RegexService
     ) {}
 
@@ -128,7 +130,7 @@ export default class ProfileController {
                 this.fileService.delete(user.profilePicture);
                 await user.profilePicture.delete();
             }
-            profilePicture.clientName = `${cuid()}.${profilePicture.extname}`;
+            profilePicture.clientName = `${cuid()}-${this.slugifyService.slugify(profilePicture.clientName)}`;
             const path = `upload/profile-picture`;
             await profilePicture.move(app.publicPath(path));
             const file: File = await File.create({
