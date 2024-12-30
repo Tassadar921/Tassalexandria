@@ -1,10 +1,10 @@
-import { configApp } from '@adonisjs/eslint-config'
+import { configApp } from '@adonisjs/eslint-config';
 
 export default {
     ...configApp(),
     rules: {
         ...configApp().rules,
-        'semi': ['error', 'always'],
+        semi: ['error', 'always'],
         'comma-dangle': ['error', 'always-multiline'],
         'max-len': ['error', { code: 100 }],
     },
@@ -16,4 +16,4 @@ export default {
             },
         },
     ],
-}
+};

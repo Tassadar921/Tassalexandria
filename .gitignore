@@ -9,8 +9,8 @@ tmp
 .env.production.local
 .env.development.local
 
-# Frontend assets compiled code
-public/assets
+# Assets & compiled code
+public/upload
 
 # Build tools specific
 npm-debug.log
@@ -23,3 +23,5 @@ yarn-error.log
 
 # Platform specific
 .DS_Store
+
+commands/exec_test.ts
