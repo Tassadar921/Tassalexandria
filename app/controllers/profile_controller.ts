@@ -9,7 +9,6 @@ import { DateTime } from 'luxon';
 import { AccessToken } from '@adonisjs/auth/access_tokens';
 import { inject } from '@adonisjs/core';
 import File from '#models/file';
-import SlugifyService from '#services/slugify_service';
 import app from '@adonisjs/core/services/app';
 import { cuid } from '@adonisjs/core/helpers';
 import FileService from '#services/file_service';
@@ -21,7 +20,6 @@ export default class ProfileController {
         private readonly userRepository: UserRepository,
         private readonly resetPasswordRepository: ResetPasswordRepository,
         private readonly mailService: BrevoMailService,
-        private readonly slugifyService: SlugifyService,
         private readonly fileService: FileService,
         private readonly regexService: RegexService
     ) {}
@@ -130,7 +128,7 @@ export default class ProfileController {
                 this.fileService.delete(user.profilePicture);
                 await user.profilePicture.delete();
             }
-            profilePicture.clientName = `${cuid()}.${this.slugifyService.slugify(profilePicture.clientName)}`;
+            profilePicture.clientName = `${cuid()}.${profilePicture.extname}`;
             const path = `upload/profile-picture`;
             await profilePicture.move(app.publicPath(path));
             const file: File = await File.create({
