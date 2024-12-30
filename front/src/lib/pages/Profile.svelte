@@ -8,7 +8,6 @@
     import {t} from 'svelte-i18n';
     import {onMount} from 'svelte';
     import FileUpload from '../shared/FileUpload.svelte';
-    import {language} from '../../stores/languageStore.js';
 
     let formValues = {
         username: '',
@@ -16,22 +15,6 @@
     };
     let path = '';
     let isValid = false;
-
-    const dateOptions = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'long',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-    };
-
-    const lightDateOptions = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    }
 
     onMount(() => {
         formValues = {
@@ -44,8 +27,8 @@
         }
     });
 
-    const handleSuccess = (data) => {
-        setProfile(data.detail);
+    const handleSuccess = (event) => {
+        setProfile(event.detail.user);
         showToast($t('toast.profile.update.success'));
     };
 

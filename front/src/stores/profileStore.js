@@ -11,7 +11,7 @@ export async function updateProfile(profile = null) {
     try {
         if (!profile) {
             const { data: fetchedProfile } = await axios.get('/api/auth/profile');
-            profile = fetchedProfile;
+            profile = fetchedProfile.user;
         }
         setProfile(profile);
     } catch (e) {
