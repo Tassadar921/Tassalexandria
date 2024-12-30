@@ -1,6 +1,6 @@
 # Tassalexandria
 
-### Front : Svelte 4
+### Front : Svelte 4, TailwindCSS, Capacitor
 
 ### Back : Adonisjs 6.14.1
 
@@ -12,6 +12,5 @@ https://tassalexandria.fr (incoming)
 
 ### Links
 
-- #### Tassadapi
-
-    - [Production](https://tassalexandria.fr)
+- [Production](https://tassalexandria.fr)
+- [MIT Licence](/doc/LICENCE.md)
