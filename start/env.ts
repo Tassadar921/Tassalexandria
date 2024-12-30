@@ -23,6 +23,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Variables for configuring database connection
   |----------------------------------------------------------
   */
+    DB_CONNECTION: Env.schema.enum(['pg', 'mysql']),
     DB_HOST: Env.schema.string({ format: 'host' }),
     DB_PORT: Env.schema.number(),
     DB_USER: Env.schema.string(),
@@ -30,11 +31,6 @@ export default await Env.create(new URL('../', import.meta.url), {
     DB_DATABASE: Env.schema.string(),
 
     API_URL: Env.schema.string(),
-    SCRYFALL_API_URL: Env.schema.string(),
-    OPENAI_API_URL: Env.schema.string(),
-    OPENAI_API_KEY: Env.schema.string(),
-    OPENAI_API_MODEL: Env.schema.string(),
-    STRIPE_SECRET_KEY: Env.schema.string(),
     ACCOUNT_SENDER_EMAIL: Env.schema.string(),
     BREVO_API_KEY: Env.schema.string(),
     FRIEND_EMAILS: Env.schema.string(),
