@@ -2,7 +2,7 @@
     import MenuItem from './MenuItem.svelte';
     import { t } from 'svelte-i18n';
     import { profile } from '../../stores/profileStore.js';
-    import FileUpload from "../shared/FileUpload.svelte";
+    import FileUpload from '../shared/FileUpload.svelte';
 
     export let footer = false;
 </script>

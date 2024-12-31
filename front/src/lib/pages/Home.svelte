@@ -1,15 +1,15 @@
 <script>
     import Card from '../shared/Card.svelte';
     import { t } from 'svelte-i18n';
-    import Title from "../shared/Title.svelte";
-    import {onMount} from "svelte";
-    import axios from "axios";
+    import Title from '../shared/Title.svelte';
+    import { onMount } from 'svelte';
+    import axios from 'axios';
 
     let products = [];
 
     onMount(async () => {
-       const { data } = await axios.get('/api/tags');
-       console.log(data);
+        const { data } = await axios.get('/api/tags');
+        console.log(data);
     });
 </script>
 

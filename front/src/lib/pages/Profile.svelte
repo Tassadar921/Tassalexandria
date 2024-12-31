@@ -3,10 +3,10 @@
     import Input from '../shared/Input.svelte';
     import Title from '../shared/Title.svelte';
     import Link from '../shared/Link.svelte';
-    import {profile, setProfile} from '../../stores/profileStore.js';
-    import {showToast} from '../../services/toastService.js';
-    import {t} from 'svelte-i18n';
-    import {onMount} from 'svelte';
+    import { profile, setProfile } from '../../stores/profileStore.js';
+    import { showToast } from '../../services/toastService.js';
+    import { t } from 'svelte-i18n';
+    import { onMount } from 'svelte';
     import FileUpload from '../shared/FileUpload.svelte';
 
     let formValues = {
@@ -43,7 +43,7 @@
     $: isValid = formValues.username && formValues.email;
 </script>
 
-<Title title={$t('profile.title')} hasBackground={true}/>
+<Title title={$t('profile.title')} hasBackground={true} />
 
 <Form action="/api/profile/update" method="POST" on:success={handleSuccess} on:error={handleError} bind:isValid>
     <Input
@@ -54,8 +54,7 @@
         min={3}
         max={50}
     />
-    <Input name="email" placeholder={$t('common.email.label')} label={$t('common.email.label')}
-           bind:value={formValues.email} disabled={true}/>
+    <Input name="email" placeholder={$t('common.email.label')} label={$t('common.email.label')} bind:value={formValues.email} disabled={true} />
     <Link href="/reset-password" className="text-primary-500 hover:text-primary-800 transition-colors duration-300">
         {$t('profile.reset-password')}
     </Link>
