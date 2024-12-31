@@ -14,7 +14,11 @@ export default class AuthController {
 
             const token: AccessToken = await User.accessTokens.create(user);
 
-            return response.send({ message: 'Logged in', token, user: user.apiSerialize() });
+            return response.send({
+                message: 'Logged in',
+                token,
+                user: user.apiSerialize(),
+            });
         } catch (e) {
             return response.unauthorized({ error: 'API Login failed' });
         }

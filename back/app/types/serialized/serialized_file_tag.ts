@@ -1,4 +1,4 @@
-import SerializedTag from "#types/serialized/serialized_tag";
+import SerializedTag from '#types/serialized/serialized_tag';
 
 type SerializedFileTag = {
     tag: SerializedTag;

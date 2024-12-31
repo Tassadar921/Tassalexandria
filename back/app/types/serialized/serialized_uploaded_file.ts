@@ -1,6 +1,6 @@
-import SerializedUser from "#types/serialized/serialized_user";
-import SerializedFile from "#types/serialized/serialized_file";
-import SerializedFileTag from "#types/serialized/serialized_file_tag";
+import SerializedUser from '#types/serialized/serialized_user';
+import SerializedFile from '#types/serialized/serialized_file';
+import SerializedFileTag from '#types/serialized/serialized_file_tag';
 
 type SerializedUploadedFile = {
     user: SerializedUser;

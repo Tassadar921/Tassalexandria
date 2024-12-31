@@ -37,9 +37,13 @@ export default class LanguageMiddleware {
         let language: Language | null;
 
         if (languageCode) {
-            language = await this.languageRepository.findOneBy({ code: languageCode.toLowerCase() });
+            language = await this.languageRepository.findOneBy({
+                code: languageCode.toLowerCase(),
+            });
         } else {
-            language = await this.languageRepository.findOneBy({ code: this.getLanguageCode(request).toLowerCase() });
+            language = await this.languageRepository.findOneBy({
+                code: this.getLanguageCode(request).toLowerCase(),
+            });
         }
 
         if (!language) {

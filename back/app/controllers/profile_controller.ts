@@ -35,12 +35,18 @@ export default class ProfileController {
     public async sendResetPasswordEmail({ request, response }: HttpContext): Promise<void> {
         const { email, frontUri } = request.only(['email', 'frontUri']);
         if (!email || !frontUri) {
-            return response.badRequest({ error: 'Email and frontUri are required' });
+            return response.badRequest({
+                error: 'Email and frontUri are required',
+            });
         } else if (!this.regexService.isValidUri(frontUri)) {
-            return response.badRequest({ error: 'frontUri has to be a valid uri' });
+            return response.badRequest({
+                error: 'frontUri has to be a valid uri',
+            });
         }
 
-        const user: User | null = await this.userRepository.findOneBy({ email });
+        const user: User | null = await this.userRepository.findOneBy({
+            email,
+        });
         if (!user) {
             return response.badRequest({ error: 'User not found' });
         }
@@ -57,7 +63,9 @@ export default class ProfileController {
         let resetPassword: ResetPassword | null = null;
         do {
             token = crypto.randomBytes(32).toString('hex');
-            resetPassword = await this.resetPasswordRepository.findOneBy({ token });
+            resetPassword = await this.resetPasswordRepository.findOneBy({
+                token,
+            });
         } while (resetPassword);
         await ResetPassword.create({
             userId: user.id,
@@ -111,7 +119,9 @@ export default class ProfileController {
         const { username } = request.all();
 
         if (!username || username.length < 3 || username.length > 50) {
-            return response.badRequest({ error: "Invalid username : it's required and has to be between 3 and 50 characters" });
+            return response.badRequest({
+                error: "Invalid username : it's required and has to be between 3 and 50 characters",
+            });
         }
 
         user.username = username;

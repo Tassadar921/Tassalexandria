@@ -71,7 +71,9 @@ export default class BaseRepository<T extends LucidModel> {
         trx?: TransactionClientContract
     ): Promise<InstanceType<T>> {
         return trx
-            ? await this.Model.firstOrNew(searchPayload, savePayload, { client: trx })
+            ? await this.Model.firstOrNew(searchPayload, savePayload, {
+                  client: trx,
+              })
             : await this.Model.firstOrNew(searchPayload, savePayload);
     }
 

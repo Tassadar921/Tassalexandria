@@ -1,22 +1,22 @@
 import { DateTime } from 'luxon';
-import {BaseModel, belongsTo, column} from '@adonisjs/lucid/orm';
-import type {BelongsTo} from "@adonisjs/lucid/types/relations";
-import Tag from "#models/tag";
-import UploadedFile from "#models/uploaded_file";
-import SerializedFileTag from "#types/serialized/serialized_file_tag";
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
+import type { BelongsTo } from '@adonisjs/lucid/types/relations';
+import Tag from '#models/tag';
+import UploadedFile from '#models/uploaded_file';
+import SerializedFileTag from '#types/serialized/serialized_file_tag';
 
 export default class FileTag extends BaseModel {
     @column({ isPrimary: true })
     declare id: string;
 
     @column()
-    declare tagId: string | null;
+    declare tagId: string;
 
     @belongsTo((): typeof Tag => Tag)
     declare tag: BelongsTo<typeof Tag>;
 
     @column()
-    declare uploadedFileId: string | null;
+    declare uploadedFileId: string;
 
     @belongsTo((): typeof UploadedFile => UploadedFile)
     declare uploadedFile: BelongsTo<typeof UploadedFile>;
