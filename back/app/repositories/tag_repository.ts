@@ -12,11 +12,16 @@ export default class TagRepository extends BaseRepository<typeof Tag> {
         super(Tag);
     }
 
-    public async search(query: string, page: number, perPage: number, uploadedFile: UploadedFile): Promise<PaginatedTags> {
-        const tags: ModelPaginatorContract<Tag> = await Tag.query()
-            .select('tags.*')
-            .leftJoin('file_tags', 'tags.id', 'file_tags.tag_id')
-            .where('file_tags.uploaded_file_id', uploadedFile.id)
+    public async search(query: string, page: number, perPage: number, uploadedFile: UploadedFile | null): Promise<PaginatedTags> {
+        let queryBuilder = Tag.query().select('tags.*');
+
+        if (uploadedFile) {
+            queryBuilder = queryBuilder
+                .leftJoin('file_tags', 'tags.id', 'file_tags.tag_id')
+                .where('file_tags.uploaded_file_id', uploadedFile.id);
+        }
+
+        const tags: ModelPaginatorContract<Tag> = await queryBuilder
             .andWhere('tags.name', 'ILIKE', `%${query}%`)
             .orderBy('tags.name')
             .paginate(page, perPage);
@@ -27,7 +32,11 @@ export default class TagRepository extends BaseRepository<typeof Tag> {
                     return tag.apiSerialize();
                 })
             ),
-            ...tags,
+            firstPage: tags.firstPage,
+            lastPage: tags.lastPage,
+            perPage: tags.perPage,
+            total: tags.total,
+            currentPage: tags.currentPage,
         };
     }
 }

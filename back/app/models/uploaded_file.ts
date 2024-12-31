@@ -12,6 +12,9 @@ export default class UploadedFile extends BaseModel {
     declare id: string;
 
     @column()
+    declare frontId: number;
+
+    @column()
     declare userId: string;
 
     @belongsTo((): typeof User => User)

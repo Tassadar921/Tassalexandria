@@ -8,7 +8,7 @@
     let products = [];
 
     onMount(async () => {
-        const { data } = await axios.get('/api/tags');
+        const { data } = await axios.get('/api/tags?query=adr');
         console.log(data);
     });
 </script>
