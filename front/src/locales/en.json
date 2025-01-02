@@ -86,6 +86,10 @@
             "download": {
                 "error": "An error occurred while downloading file"
             },
+            "tags": {
+                "success": "Tags updated",
+                "error": "An error occurred while updating tags"
+            },
             "rename": {
                 "success": "File renamed",
                 "error": "An error occurred while renaming file"

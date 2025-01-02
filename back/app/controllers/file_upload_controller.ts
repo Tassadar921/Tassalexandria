@@ -17,7 +17,7 @@ export default class FileUploadController {
     constructor(
         private readonly tagRepository: TagRepository,
         private readonly uploadedFileRepository: UploadedFileRepository,
-        private readonly slugifyService: SlugifyService
+        private readonly slugifyService: SlugifyService,
     ) {}
     public async getTags({ request, response }: HttpContext): Promise<void> {
         const fileId = request.qs().fileId;
@@ -49,7 +49,10 @@ export default class FileUploadController {
         }
 
         const { title } = request.only(['title']);
-        console.log(title);
+        if (!title) {
+            return response.badRequest({ error: 'Title is required' });
+        }
+
         uploadedFile.title = title;
         await uploadedFile.save();
 
@@ -57,6 +60,17 @@ export default class FileUploadController {
     }
 
     public async download({ request, response }: HttpContext): Promise<void> {
+        const {fileId} = request.params();
+
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
+        if (!uploadedFile) {
+            return response.notFound({error: 'File not found'});
+        }
+
+        return response.download(app.makePath(uploadedFile.file.path));
+    }
+
+    public async updateTags({ request, response }: HttpContext): Promise<void> {
         const { fileId } = request.params();
 
         const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
@@ -64,7 +78,25 @@ export default class FileUploadController {
             return response.notFound({ error: 'File not found' });
         }
 
-        return response.download(app.makePath(uploadedFile.file.path));
+        const { tags } = request.only(['tags']);
+
+        await Promise.all(
+            uploadedFile.fileTags.map(async (fileTag: FileTag): Promise<void> => {
+                await fileTag.delete();
+            })
+        )
+
+        if (tags && Array.isArray(tags)) {
+            const foundTags: Tag[] = await this.getFoundTags(tags);
+            for (const tag of foundTags) {
+                await FileTag.create({
+                    tagId: tag.id,
+                    uploadedFileId: uploadedFile.id,
+                });
+            }
+        }
+
+        return response.send({ message: 'Tags updated' });
     }
 
     public async upload({ request, auth, response }: HttpContext): Promise<void> {
@@ -75,19 +107,7 @@ export default class FileUploadController {
             return response.badRequest({ error: 'Title is required' });
         }
 
-        const foundTags: Tag[] = [];
-        for (const name of tags) {
-            const red: number = Math.floor(Math.random() * 255);
-            const green: number = Math.floor(Math.random() * 255);
-            const blue: number = Math.floor(Math.random() * 255);
-
-            const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
-            await tag.refresh();
-
-            console.log(tag.name);
-
-            foundTags.push(tag);
-        }
+        const foundTags: Tag[] = await this.getFoundTags(tags);
 
         const inputFile = request.file('file', {
             size: '2mb',
@@ -123,5 +143,21 @@ export default class FileUploadController {
 
             return response.send({ fileId: uploadedFile.frontId });
         }
+    }
+
+    private async getFoundTags(tags: string[]): Promise<Tag[]> {
+        const foundTags: Tag[] = [];
+        for (const name of tags) {
+            const red: number = Math.floor(Math.random() * 255);
+            const green: number = Math.floor(Math.random() * 255);
+            const blue: number = Math.floor(Math.random() * 255);
+
+            const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
+            await tag.refresh();
+
+            foundTags.push(tag);
+        }
+
+        return foundTags;
     }
 }

@@ -28,6 +28,7 @@ router
                 router.get('/file/:fileId', [FileUploadController, 'getFile']);
                 router.get('/file/:fileId/download', [FileUploadController, 'download']);
                 router.post('/file/:fileId/rename', [FileUploadController, 'rename']);
+                router.post('/file/:fileId/tags', [FileUploadController, 'updateTags']);
                 router.post('/upload', [FileUploadController, 'upload']);
 
                 router

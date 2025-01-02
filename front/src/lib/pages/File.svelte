@@ -3,17 +3,19 @@
     import axios from 'axios';
     import Title from '../shared/Title.svelte';
     import { t } from 'svelte-i18n';
-    import Tag from '../file/Tag.svelte';
     import { language } from '../../stores/languageStore';
     import Subtitle from '../shared/Subtitle.svelte';
     import Fab from '../shared/Fab.svelte';
     import Button from '../shared/Button.svelte';
     import Editable from '../shared/Editable.svelte';
     import { showToast } from '../../services/toastService.js';
+    import TagSelector from "../upload/TagSelector.svelte";
 
     export let id;
 
     let uploadedFile = null;
+    let selectedTags = [];
+    let tagsUpdated = false;
     let createdAt;
     let updatedAt;
 
@@ -31,10 +33,15 @@
         try {
             const { data } = await axios.get(`/api/file/${id}`);
             uploadedFile = data.file;
+            selectedTags = uploadedFile?.fileTags?.map(fileTag => fileTag.tag) ?? [];
         } catch (e) {
             showToast($t('toast.file.fetch.error'), 'error');
         }
     });
+
+    const saveTags = () => {
+        console.log(selectedTags);
+    };
 
     const handleDownload = async () => {
         try {
@@ -85,10 +92,8 @@
     </Editable>
     <Subtitle>{$t('common.created-at')}: {createdAt}</Subtitle>
     <Subtitle>{$t('common.updated-at')}: {updatedAt}</Subtitle>
-    <div class="flex gap-3 flex-wrap mt-2">
-        {#each uploadedFile.fileTags as fileTag}
-            <Tag tag={fileTag.tag} />
-        {/each}
+    <div class="mt-3">
+        <TagSelector bind:selectedTags update={true} {id} />
     </div>
     {#if uploadedFile.file.mimeType.split('/')[0] === 'image'}
         <div class="w-full flex justify-center">

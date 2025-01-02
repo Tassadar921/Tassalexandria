@@ -86,6 +86,10 @@
             "download": {
                 "error": "Une erreur est survenue lors du téléchargement du fichier"
             },
+            "tags": {
+                "success": "Tags mis à jour",
+                "error": "Une erreur est survenue lors de la mise à jour des tags"
+            },
             "rename": {
                 "success": "Fichié renommé",
                 "error": "Une erreur est survenue lors du renommage du fichier"

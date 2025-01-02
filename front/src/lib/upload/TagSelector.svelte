@@ -5,14 +5,20 @@
     import { onMount } from 'svelte';
     import TagItem from './TagItem.svelte';
     import SelectedTag from './SelectedTag.svelte';
+    import IconButton from "../shared/IconButton.svelte";
+    import {showToast} from "../../services/toastService.js";
 
     export let selectedTags = [];
+    export let update = false;
+    export let id = null;
 
     let menuOpen = false;
     let query = '';
 
     let tags = [];
     let filteredTags = [];
+
+    let isSaveDisabled = true;
 
     onMount(async () => {
         await getItemsRequest();
@@ -30,16 +36,16 @@
     };
 
     const handleDeleteTag = async (tag) => {
-        console.log(tag.name, selectedTags.length);
         selectedTags = selectedTags.filter((item) => item.name !== tag.name);
-        console.log(selectedTags.length);
         await getItemsRequest();
+        isSaveDisabled = false;
     };
 
     const selectItem = async (item) => {
         if (!selectedTags.includes(item)) {
             selectedTags = [...selectedTags, item];
             await getItemsRequest();
+            isSaveDisabled = false;
         }
         menuOpen = true;
     };
@@ -50,7 +56,20 @@
                 excludedNames: selectedTags.map((tag) => tag.name),
             });
             tags = data.tags;
-        } catch (e) {}
+        } catch (e) {
+            showToast($t('toast.tags.error'), 'error');
+        }
+    };
+
+    const updateRequest = async () => {
+        try {
+            await axios.post(`/api/file/${id}/tags`, {
+                tags: selectedTags.map((tag) => tag.name),
+            });
+            showToast($t('toast.file.tags.success'));
+        } catch (e) {
+            showToast($t('toast.file.tags.error'), 'error');
+        }
     };
 </script>
 
@@ -60,9 +79,25 @@
     {/each}
 </div>
 
-<div class="relative inline-block w-full" on:focusin={() => (menuOpen = true)} on:focusout={handleFocusOut}>
+{#if update}
+    <div class="mt-8 ml-3">
+        <IconButton size="50" bind:disabled={isSaveDisabled} icon="save" on:click={updateRequest} />
+    </div>
+{/if}
+
+<div
+    class="relative inline-block w-full"
+    on:focusin={() => (menuOpen = true)}
+    on:focusout={handleFocusOut}
+>
     <Search label={$t('upload.search-tags')} bind:search={query} {handleSearch} minChars={0} />
-    <div id="myDropdown" class:show={menuOpen} class="dropdown-content max-h-96 overflow-y-scroll">
+
+    <div
+        id="myDropdown"
+        class="min-w-64 max-h-96 hidden absolute border border-gray-300 overflow-y-scroll"
+        class:block={menuOpen}
+        class:hidden={!menuOpen}
+    >
         <ul>
             {#if query.length}
                 {#each filteredTags as tag}
@@ -76,18 +111,3 @@
         </ul>
     </div>
 </div>
-
-<style>
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f6f6f6;
-        min-width: 230px;
-        border: 1px solid #ddd;
-        z-index: 100;
-    }
-
-    .show {
-        display: block;
-    }
-</style>
