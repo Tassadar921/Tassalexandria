@@ -4,6 +4,7 @@ import { middleware } from '#start/kernel';
 const AuthController = () => import('#controllers/auth_controller');
 const ProfileController = () => import('#controllers/profile_controller');
 const FileUploadController = () => import('#controllers/file_upload_controller');
+const FileController = () => import('#controllers/file_controller');
 
 // API requests
 router
@@ -25,11 +26,16 @@ router
                 router.get('/logout', [AuthController, 'logout']);
 
                 router.post('/tags', [FileUploadController, 'getTags']);
-                router.get('/file/:fileId', [FileUploadController, 'getFile']);
-                router.get('/file/:fileId/download', [FileUploadController, 'download']);
-                router.post('/file/:fileId/rename', [FileUploadController, 'rename']);
-                router.post('/file/:fileId/tags', [FileUploadController, 'updateTags']);
                 router.post('/upload', [FileUploadController, 'upload']);
+
+                router
+                    .group((): void => {
+                        router.get('/', [FileController, 'get']);
+                        router.get('/download', [FileController, 'download']);
+                        router.post('/rename', [FileController, 'rename']);
+                        router.post('/tags', [FileController, 'updateTags']);
+                    })
+                    .prefix('/file/:fileId');
 
                 router
                     .group((): void => {

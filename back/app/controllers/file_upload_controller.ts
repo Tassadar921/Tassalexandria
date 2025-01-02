@@ -11,10 +11,12 @@ import app from '@adonisjs/core/services/app';
 import File from '#models/file';
 import SlugifyService from '#services/slugify_service';
 import FileTag from '#models/file_tag';
+import FileService from "#services/file_service";
 
 @inject()
 export default class FileUploadController {
     constructor(
+        private readonly fileService: FileService,
         private readonly tagRepository: TagRepository,
         private readonly uploadedFileRepository: UploadedFileRepository,
         private readonly slugifyService: SlugifyService,
@@ -29,76 +31,6 @@ export default class FileUploadController {
         });
     }
 
-    public async getFile({ request, response }: HttpContext): Promise<void> {
-        const { fileId } = request.params();
-
-        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
-        if (!uploadedFile) {
-            return response.notFound({ error: 'File not found' });
-        }
-
-        return response.send({ file: uploadedFile.apiSerialize() });
-    }
-
-    public async rename({ request, response }: HttpContext): Promise<void> {
-        const { fileId } = request.params();
-
-        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
-        if (!uploadedFile) {
-            return response.notFound({ error: 'File not found' });
-        }
-
-        const { title } = request.only(['title']);
-        if (!title) {
-            return response.badRequest({ error: 'Title is required' });
-        }
-
-        uploadedFile.title = title;
-        await uploadedFile.save();
-
-        return response.send({ message: 'File renamed' });
-    }
-
-    public async download({ request, response }: HttpContext): Promise<void> {
-        const {fileId} = request.params();
-
-        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
-        if (!uploadedFile) {
-            return response.notFound({error: 'File not found'});
-        }
-
-        return response.download(app.makePath(uploadedFile.file.path));
-    }
-
-    public async updateTags({ request, response }: HttpContext): Promise<void> {
-        const { fileId } = request.params();
-
-        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
-        if (!uploadedFile) {
-            return response.notFound({ error: 'File not found' });
-        }
-
-        const { tags } = request.only(['tags']);
-
-        await Promise.all(
-            uploadedFile.fileTags.map(async (fileTag: FileTag): Promise<void> => {
-                await fileTag.delete();
-            })
-        )
-
-        if (tags && Array.isArray(tags)) {
-            const foundTags: Tag[] = await this.getFoundTags(tags);
-            for (const tag of foundTags) {
-                await FileTag.create({
-                    tagId: tag.id,
-                    uploadedFileId: uploadedFile.id,
-                });
-            }
-        }
-
-        return response.send({ message: 'Tags updated' });
-    }
-
     public async upload({ request, auth, response }: HttpContext): Promise<void> {
         const user: User & { currentAccessToken: AccessToken } = await auth.use('api').authenticate();
         const { title, tags } = request.only(['title', 'tags']);
@@ -107,7 +39,7 @@ export default class FileUploadController {
             return response.badRequest({ error: 'Title is required' });
         }
 
-        const foundTags: Tag[] = await this.getFoundTags(tags);
+        const foundTags: Tag[] = await this.fileService.getFoundTags(tags);
 
         const inputFile = request.file('file', {
             size: '2mb',
@@ -143,21 +75,5 @@ export default class FileUploadController {
 
             return response.send({ fileId: uploadedFile.frontId });
         }
-    }
-
-    private async getFoundTags(tags: string[]): Promise<Tag[]> {
-        const foundTags: Tag[] = [];
-        for (const name of tags) {
-            const red: number = Math.floor(Math.random() * 255);
-            const green: number = Math.floor(Math.random() * 255);
-            const blue: number = Math.floor(Math.random() * 255);
-
-            const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
-            await tag.refresh();
-
-            foundTags.push(tag);
-        }
-
-        return foundTags;
     }
 }
