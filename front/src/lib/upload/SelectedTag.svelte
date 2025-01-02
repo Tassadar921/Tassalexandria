@@ -1,5 +1,5 @@
 <script>
-    import Icon from "../shared/Icon.svelte";
+    import Icon from '../shared/Icon.svelte';
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();

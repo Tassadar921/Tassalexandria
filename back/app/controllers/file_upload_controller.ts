@@ -7,7 +7,7 @@ import Tag from '#models/tag';
 import UploadedFileRepository from '#repositories/uploaded_file_repository';
 import UploadedFile from '#models/uploaded_file';
 import { cuid } from '@adonisjs/core/helpers';
-import app from '@adonisjs/core/services/app'
+import app from '@adonisjs/core/services/app';
 import File from '#models/file';
 import SlugifyService from '#services/slugify_service';
 import FileTag from '#models/file_tag';
@@ -77,9 +77,9 @@ export default class FileUploadController {
 
         const foundTags: Tag[] = [];
         for (const name of tags) {
-            const red: number = Math.floor(Math.random()*255);
-            const green: number = Math.floor(Math.random()*255);
-            const blue: number = Math.floor(Math.random()*255);
+            const red: number = Math.floor(Math.random() * 255);
+            const green: number = Math.floor(Math.random() * 255);
+            const blue: number = Math.floor(Math.random() * 255);
 
             const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
             await tag.refresh();

@@ -1,15 +1,15 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount } from 'svelte';
     import axios from 'axios';
-    import Title from "../shared/Title.svelte";
+    import Title from '../shared/Title.svelte';
     import { t } from 'svelte-i18n';
-    import Tag from "../file/Tag.svelte";
+    import Tag from '../file/Tag.svelte';
     import { language } from '../../stores/languageStore';
-    import Subtitle from "../shared/Subtitle.svelte";
-    import Fab from "../shared/Fab.svelte";
-    import Button from "../shared/Button.svelte";
-    import Editable from "../shared/Editable.svelte";
-    import {showToast} from "../../services/toastService.js";
+    import Subtitle from '../shared/Subtitle.svelte';
+    import Fab from '../shared/Fab.svelte';
+    import Button from '../shared/Button.svelte';
+    import Editable from '../shared/Editable.svelte';
+    import { showToast } from '../../services/toastService.js';
 
     export let id;
 
@@ -39,7 +39,7 @@
     const handleDownload = async () => {
         try {
             const response = await axios.get(`${uploadedFile.file.path}`, {
-                responseType: 'blob'
+                responseType: 'blob',
             });
 
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -93,7 +93,11 @@
     {#if uploadedFile.file.mimeType.split('/')[0] === 'image'}
         <div class="w-full flex justify-center">
             <Button customStyle={true} className="mt-10" on:click={handleDownload}>
-                <img alt={uploadedFile.title} src={`${process.env.VITE_TASSADAPI_BASE_URL}/${uploadedFile.file.path}`} class="w-64 m-auto rounded-2xl" />
+                <img
+                    alt={uploadedFile.title}
+                    src={`${process.env.VITE_TASSADAPI_BASE_URL}/${uploadedFile.file.path}`}
+                    class="w-64 m-auto rounded-2xl"
+                />
             </Button>
         </div>
     {/if}

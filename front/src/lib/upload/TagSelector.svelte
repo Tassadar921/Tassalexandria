@@ -50,9 +50,7 @@
                 excludedNames: selectedTags.map((tag) => tag.name),
             });
             tags = data.tags;
-        } catch (e) {
-
-        }
+        } catch (e) {}
     };
 </script>
 

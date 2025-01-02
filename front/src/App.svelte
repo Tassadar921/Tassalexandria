@@ -20,7 +20,7 @@
     import { setLanguage } from './stores/languageStore.js';
     import Upload from './lib/pages/Upload.svelte';
     import Browse from './lib/pages/Browse.svelte';
-    import File from "./lib/pages/File.svelte";
+    import File from './lib/pages/File.svelte';
 
     export let url = '';
 
