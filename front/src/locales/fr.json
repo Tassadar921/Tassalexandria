@@ -98,6 +98,8 @@
     },
     "menu": {
         "home": "Accueil",
+        "upload": "Upload",
+        "browse": "Parcourir",
         "settings": "Paramètres",
         "profile": "Profil",
         "logout": "Déconnexion",
