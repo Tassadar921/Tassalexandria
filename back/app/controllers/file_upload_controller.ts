@@ -35,8 +35,14 @@ export default class FileUploadController {
 
         const foundTags: Tag[] = [];
         for (const name of tags) {
-            const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name });
+            const red: number = Math.floor(Math.random()*255);
+            const green: number = Math.floor(Math.random()*255);
+            const blue: number = Math.floor(Math.random()*255);
+
+            const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
             await tag.refresh();
+
+            console.log(tag.name);
 
             foundTags.push(tag);
         }

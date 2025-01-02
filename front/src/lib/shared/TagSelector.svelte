@@ -29,6 +29,13 @@
         await getItemsRequest();
     };
 
+    const handleDeleteTag = async (tag) => {
+        console.log(tag.name, selectedTags.length);
+        selectedTags = selectedTags.filter((item) => item.name !== tag.name);
+        console.log(selectedTags.length);
+        await getItemsRequest();
+    };
+
     const selectItem = async (item) => {
         if (!selectedTags.includes(item)) {
             selectedTags = [...selectedTags, item];
@@ -47,7 +54,7 @@
 
 <div class="flex gap-3 flex-wrap">
     {#each selectedTags as tag}
-        <SelectedTag {tag} />
+        <SelectedTag {tag} on:delete={() => handleDeleteTag(tag)} />
     {/each}
 </div>
 
