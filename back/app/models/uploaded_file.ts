@@ -37,6 +37,7 @@ export default class UploadedFile extends BaseModel {
 
     public apiSerialize(): SerializedUploadedFile {
         return {
+            id: this.frontId,
             user: this.owner.apiSerialize(),
             file: this.file.apiSerialize(),
             fileTags: this.fileTags.map((fileTag: FileTag): SerializedFileTag => fileTag.apiSerialize()),

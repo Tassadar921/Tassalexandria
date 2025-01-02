@@ -1,6 +1,11 @@
 <script>
+    import { t } from 'svelte-i18n';
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
     export let search = '';
-    export let placeholder = 'Search...';
+    export let placeholder = null;
     export let debounce = 300;
     export let minChars = 3;
     export let name = '';
@@ -14,10 +19,6 @@
     let searchTimeout = null;
     let focused = false;
 
-    $: if (selectedObserver && selected) {
-        name.focus();
-    }
-
     const searchFunction = async () => {
         if (search.length < minChars) {
             results = [];
@@ -30,9 +31,25 @@
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(searchFunction, debounce);
     };
+
+    const handleFocus = () => {
+        focused = true;
+        dispatch('focus');
+    };
+
+    const handleBlur = () => {
+        focused = false;
+        dispatch('blur');
+    };
+
+    $: placeholder = placeholder ?? $t('common.search');
+
+    $: if (selectedObserver && selected) {
+        name.focus();
+    }
 </script>
 
-<div class="relative w-full mt-8 mb-5">
+<div class="relative w-full mt-8">
     <label
         for={name}
         class="absolute pointer-events-none z-10 transition-all duration-800 ease-in-out {focused || search.length
@@ -40,8 +57,8 @@
             : 'text-gray-500 bottom-2.5 left-3'}">{label}</label
     >
     <input
-        on:focus={() => (focused = true)}
-        on:blur={() => (focused = false)}
+        on:focus={handleFocus}
+        on:blur={handleBlur}
         on:keyup={searchDebounced}
         type="search"
         bind:value={search}

@@ -155,6 +155,7 @@ export default class ProfileController {
         }
 
         await user.save();
+        await user.refresh();
 
         return response.send({ user: user.apiSerialize() });
     }

@@ -2,15 +2,22 @@
     import Card from '../shared/Card.svelte';
     import { t } from 'svelte-i18n';
     import Title from '../shared/Title.svelte';
-    import { onMount } from 'svelte';
-    import axios from 'axios';
 
     let products = [];
 
-    onMount(async () => {
-        const { data } = await axios.get('/api/tags?query=adr');
-        console.log(data);
-    });
+    $: products = [
+        {
+            title: $t('upload.title'),
+            icon: 'upload',
+            href: '/upload',
+            description: $t('upload.description'),
+        }, {
+            title: $t('browse.title'),
+            icon: 'search',
+            href: '/browse',
+            description: $t('browse.description'),
+        }
+    ];
 </script>
 
 <Title title={$t('home.title')} />

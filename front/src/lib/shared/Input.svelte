@@ -1,6 +1,9 @@
 <script>
     import Icon from './Icon.svelte';
     import Button from './Button.svelte';
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
 
     export let type = 'text';
     export let value = '';
@@ -29,6 +32,16 @@
         ...(min !== null && { min }),
         ...(max !== null && { max }),
     };
+
+    const handleFocus = () => {
+        focused = true;
+        dispatch('focus');
+    };
+
+    const handleBlur = () => {
+        focused = false;
+        dispatch('blur');
+    };
 </script>
 
 <div class="relative mt-10 mb-5">
@@ -46,8 +59,8 @@
 
     {#if realType !== 'password'}
         <input
-            on:focus={() => (focused = true)}
-            on:blur={() => (focused = false)}
+            on:focus={handleFocus}
+            on:blur={handleBlur}
             use:typeWorkaround
             bind:value
             placeholder={focused || value ? placeholder : ''}

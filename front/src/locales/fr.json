@@ -7,7 +7,7 @@
         "close-modal": "Fermer la fenêtre",
         "cancel": "Annuler",
         "back-to-home": "Retour à la page d'accueil",
-        "search": "Rechercher",
+        "search": "Rechercher ...",
         "name": "Nom",
         "username": {
             "label": "Nom d'utilisateur",
@@ -65,6 +65,10 @@
                 "success": "Profil mis à jour",
                 "error": "Une erreur est survenue lors de la mise à jour du profil"
             }
+        },
+        "upload": {
+            "success": "Fichier sauvegardé",
+            "error": "Une erreur est survenue lors de la sauvegarde du fichier"
         }
     },
     "menu": {
@@ -118,5 +122,17 @@
     },
     "already-connected": {
         "title": "Déjà connecté"
+    },
+    "upload": {
+        "title": "Upload",
+        "description": "Uploadez des fichiers pour les partager avec vos amis",
+        "file": {
+            "title": "Fichier à partager"
+        },
+        "search-tags": "Rechercher des tags"
+    },
+    "browse": {
+        "title": "Parcourir",
+        "description": "Parcourez les fichiers uploadés par vous et vos amis"
     }
 }

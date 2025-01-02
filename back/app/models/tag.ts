@@ -10,7 +10,13 @@ export default class Tag extends BaseModel {
     declare name: string;
 
     @column()
-    declare color: string;
+    declare red: number;
+
+    @column()
+    declare green: number;
+
+    @column()
+    declare blue: number;
 
     @column.dateTime({ autoCreate: true })
     declare createdAt: DateTime;
@@ -21,7 +27,9 @@ export default class Tag extends BaseModel {
     public apiSerialize(): SerializedTag {
         return {
             name: this.name,
-            color: this.color,
+            red: this.red,
+            green: this.green,
+            blue: this.blue,
             createdAt: this.createdAt?.toString(),
             updatedAt: this.updatedAt?.toString(),
         };

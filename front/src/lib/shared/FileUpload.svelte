@@ -1,8 +1,8 @@
 <script>
     import Icon from './Icon.svelte';
-    import { t } from 'svelte-i18n';
-    import { onMount } from 'svelte';
-    import { raw } from '../../services/stringService.js';
+    import {t} from 'svelte-i18n';
+    import {onMount} from 'svelte';
+    import {raw} from '../../services/stringService.js';
 
     export let name = '';
     export let description = '';
@@ -11,9 +11,9 @@
     export let accept = '';
     export let path = '';
     export let fileName = '';
+    export let file = null;
 
     let acceptedFormats = '';
-    let file = null;
     let isDragging = false;
     let previewSrc = `${process.env.VITE_TASSADAPI_BASE_URL}/${path}`;
 
@@ -41,6 +41,10 @@
             } else {
                 previewSrc = '';
             }
+        } else {
+            file = null;
+            fileName = '';
+            previewSrc = '';
         }
     };
 
@@ -61,7 +65,6 @@
             file = files[0];
             fileName = file.name;
 
-            // Generate a preview for images
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -71,6 +74,10 @@
             } else {
                 previewSrc = '';
             }
+        } else {
+            file = null;
+            fileName = '';
+            previewSrc = '';
         }
     };
 
@@ -87,7 +94,7 @@
     {/if}
     <button
         type="button"
-        class={`w-${width} flex flex-col items-center justify-center border-2 rounded-lg cursor-pointer transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 m-auto p-3`}
+        class={`w-${width} flex flex-col items-center justify-center border-2 border-gray-400 dark:border-white rounded-lg cursor-pointer transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-48 m-auto p-3`}
         class:bg-blue-50={isDragging}
         class:border-blue-500={isDragging}
         on:click={() => document.getElementById('file-upload').click()}
@@ -97,15 +104,16 @@
         on:keydown={handleKeyDown}
         aria-label="File uploader"
     >
-        <input id="file-upload" type="file" class="hidden" {name} accept={acceptedFormats} on:change={handleFileChange} />
+        <input id="file-upload" type="file" class="hidden" {name} accept={acceptedFormats}
+               on:change={handleFileChange}/>
         <span class="text-primary-500">
-            <Icon name="upload" size="35" />
+            <Icon name="upload" size="35"/>
         </span>
         <span class="text-center text-sm text-gray-500 my-3">
             {#if fileName}
                 {#if previewSrc}
                     <div class="mt-3 flex justify-center">
-                        <img src={previewSrc} alt="Preview" class="w-24 h-24 object-cover rounded" />
+                        <img src={previewSrc} alt="Preview" class="w-24 h-24 object-cover rounded"/>
                     </div>
                 {:else}
                     {fileName}

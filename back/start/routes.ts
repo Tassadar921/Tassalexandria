@@ -24,7 +24,7 @@ router
 
                 router.get('/logout', [AuthController, 'logout']);
 
-                router.get('/tags', [FileUploadController, 'getTags']);
+                router.post('/tags', [FileUploadController, 'getTags']);
                 router.post('/upload', [FileUploadController, 'upload']);
 
                 router

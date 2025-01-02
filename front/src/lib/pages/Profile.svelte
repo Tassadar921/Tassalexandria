@@ -40,6 +40,8 @@
         };
     };
 
+    $: console.log($profile);
+
     $: isValid = formValues.username && formValues.email;
 </script>
 

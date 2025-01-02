@@ -1,6 +1,8 @@
 type SerializedTag = {
     name: string;
-    color: string;
+    red: number;
+    green: number;
+    blue: number;
     createdAt?: string;
     updatedAt?: string;
 };

@@ -7,7 +7,7 @@
         "close-modal": "Close modal",
         "cancel": "Cancel",
         "back-to-home": "Back to homepage",
-        "search": "Search",
+        "search": "Search ...",
         "name": "Name",
         "username": {
             "label": "Username",
@@ -65,6 +65,10 @@
                 "success": "Profile updated",
                 "error": "An error occurred while updating your profile"
             }
+        },
+        "upload": {
+            "success": "File saved",
+            "error": "An error occurred while saving file"
         }
     },
     "menu": {
@@ -118,5 +122,17 @@
     },
     "already-connected": {
         "title": "Already connected"
+    },
+    "upload": {
+        "title": "Upload",
+        "description": "Upload files to share with your friends",
+        "file": {
+            "title": "File to share"
+        },
+        "search-tags": "Search tags"
+    },
+    "browse": {
+        "title": "Browse",
+        "description": "Browse all files uploaded by your and your friends"
     }
 }

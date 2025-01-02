@@ -18,6 +18,8 @@
     import AlreadyConnected from './lib/pages/AlreadyConnected.svelte';
     import Menu from './lib/menu/Menu.svelte';
     import { setLanguage } from './stores/languageStore.js';
+    import Upload from "./lib/pages/Upload.svelte";
+    import Browse from "./lib/pages/Browse.svelte";
 
     export let url = '';
 
@@ -72,10 +74,16 @@
                     <Route path="/"><Homepage /></Route>
                     <Route path="/login"><AlreadyConnected /></Route>
 
+                    <Route path="/upload"><Upload /></Route>
+                    <Route path="/browse"><Browse /></Route>
+
                     <Route path="/profile"><Profile /></Route>
                     <Route path="/logout"><Logout /></Route>
                 {:else}
                     <Route path="/login"><Login /></Route>
+
+                    <Route path="/upload"><Forbidden /></Route>
+                    <Route path="/browse"><Forbidden /></Route>
 
                     <Route path="/"><Forbidden /></Route>
                     <Route path="/profile"><Forbidden /></Route>
