@@ -39,10 +39,6 @@
         }
     });
 
-    const saveTags = () => {
-        console.log(selectedTags);
-    };
-
     const handleDownload = async () => {
         try {
             const response = await axios.get(`${uploadedFile.file.path}`, {

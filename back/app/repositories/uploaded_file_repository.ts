@@ -1,6 +1,9 @@
 import BaseRepository from '#repositories/base/base_repository';
 import { inject } from '@adonisjs/core';
 import UploadedFile from '#models/uploaded_file';
+import { ModelPaginatorContract } from '@adonisjs/lucid/types/model';
+import PaginatedUploadedFile from '#types/paginated/paginated_uploaded_file';
+import SerializedUploadedFile from '#types/serialized/serialized_uploaded_file';
 
 @inject()
 export default class UploadedFileRepository extends BaseRepository<typeof UploadedFile> {
@@ -17,5 +20,45 @@ export default class UploadedFileRepository extends BaseRepository<typeof Upload
                 fileTagsQuery.preload('tag');
             })
             .first();
+    }
+
+    public async search(query: string, tags: string[], page: number, perPage: number): Promise<PaginatedUploadedFile> {
+        const uploadedFiles: ModelPaginatorContract<UploadedFile> = await UploadedFile.query()
+            .select('uploaded_files.*')
+            .leftJoin('file_tags', 'uploaded_files.id', 'file_tags.uploaded_file_id')
+            .leftJoin('tags', 'tags.id', 'file_tags.tag_id')
+            .leftJoin('users', 'users.id', 'uploaded_files.user_id')
+            .where((queryBuilder): void => {
+                queryBuilder
+                    .where('uploaded_files.title', 'ILIKE', `%${query}%`)
+                    .orWhere('users.email', 'ILIKE', `%${query}%`)
+                    .orWhere('users.username', 'ILIKE', `%${query}%`);
+            })
+            .if(tags.length > 0, (queryBuilder): void => {
+                queryBuilder.andWhere((subQuery): void => {
+                    subQuery.whereIn('tags.name', tags);
+                });
+            })
+            .preload('owner')
+            .preload('file')
+            .preload('fileTags', (fileTagsQuery): void => {
+                fileTagsQuery.preload('tag');
+            })
+            .distinct('uploaded_files.id')
+            .orderBy('uploaded_files.title')
+            .paginate(page, perPage);
+
+        return {
+            uploadedFiles: await Promise.all(
+                uploadedFiles.all().map((uploadedFile: UploadedFile): SerializedUploadedFile => {
+                    return uploadedFile.apiSerialize();
+                })
+            ),
+            firstPage: uploadedFiles.firstPage,
+            lastPage: uploadedFiles.lastPage,
+            perPage,
+            total: uploadedFiles.total,
+            currentPage: page,
+        };
     }
 }

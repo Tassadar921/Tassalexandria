@@ -30,12 +30,17 @@ router
 
                 router
                     .group((): void => {
-                        router.get('/', [FileController, 'get']);
-                        router.get('/download', [FileController, 'download']);
-                        router.post('/rename', [FileController, 'rename']);
-                        router.post('/tags', [FileController, 'updateTags']);
+                        router.get('/search', [FileController, 'search']);
+                        router
+                            .group((): void => {
+                                router.get('/', [FileController, 'get']);
+                                router.get('/download', [FileController, 'download']);
+                                router.post('/rename', [FileController, 'rename']);
+                                router.post('/tags', [FileController, 'updateTags']);
+                            })
+                            .prefix('/:fileId');
                     })
-                    .prefix('/file/:fileId');
+                    .prefix('/file');
 
                 router
                     .group((): void => {

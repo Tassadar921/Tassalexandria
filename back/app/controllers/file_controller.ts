@@ -11,7 +11,7 @@ import FileService from '#services/file_service';
 export default class FileController {
     constructor(
         private readonly fileService: FileService,
-        private readonly uploadedFileRepository: UploadedFileRepository
+        private readonly uploadedFileRepository: UploadedFileRepository,
     ) {}
 
     public async get({ request, response }: HttpContext): Promise<void> {
@@ -82,5 +82,18 @@ export default class FileController {
         }
 
         return response.send({ message: 'Tags updated' });
+    }
+
+    public async search({ request, response }: HttpContext): Promise<void> {
+        const tags = request.qs().tags;
+        const splitTags = tags?.split(',');
+        if (tags && Array.isArray(splitTags) && splitTags.length) {
+            return response.send({
+                uploadedFiles: await this.uploadedFileRepository.search(request.qs().query ?? '', splitTags, request.qs().page ?? 1, request.qs().perPage ?? 24),
+            });
+        }
+        return response.send({
+            uploadedFiles: await this.uploadedFileRepository.search(request.qs().query ?? '', [], request.qs().page ?? 1, request.qs().perPage ?? 24),
+        });
     }
 }

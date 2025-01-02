@@ -7,9 +7,13 @@
     import SelectedTag from './SelectedTag.svelte';
     import IconButton from '../shared/IconButton.svelte';
     import { showToast } from '../../services/toastService.js';
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
 
     export let selectedTags = [];
     export let update = false;
+    export let search = false;
     export let id = null;
 
     let menuOpen = false;
@@ -46,6 +50,7 @@
             selectedTags = [...selectedTags, item];
             await getItemsRequest();
             isSaveDisabled = false;
+            dispatch('select');
         }
         menuOpen = true;
     };
@@ -75,7 +80,7 @@
 
 <div class="flex gap-3 flex-wrap">
     {#each selectedTags as tag}
-        <SelectedTag {tag} on:delete={() => handleDeleteTag(tag)} />
+        <SelectedTag {tag} on:delete={() => handleDeleteTag(tag)} {search} />
     {/each}
 </div>
 
