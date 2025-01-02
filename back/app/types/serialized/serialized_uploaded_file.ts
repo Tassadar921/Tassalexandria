@@ -4,6 +4,7 @@ import SerializedFileTag from '#types/serialized/serialized_file_tag';
 
 type SerializedUploadedFile = {
     id: number;
+    title: string;
     user: SerializedUser;
     file: SerializedFile;
     fileTags: SerializedFileTag[];

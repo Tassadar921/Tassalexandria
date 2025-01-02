@@ -9,6 +9,12 @@
         "back-to-home": "Back to homepage",
         "search": "Search ...",
         "name": "Name",
+        "created-at": "Created at",
+        "updated-at": "Updated at",
+        "title": {
+            "label": "Title",
+            "placeholder": "Jesus' photo"
+        },
         "username": {
             "label": "Username",
             "placeholder": "John123"
@@ -65,6 +71,9 @@
                 "success": "Profile updated",
                 "error": "An error occurred while updating your profile"
             }
+        },
+        "tags": {
+            "error": "An error occurred while fetching tags"
         },
         "upload": {
             "success": "File saved",
@@ -134,5 +143,8 @@
     "browse": {
         "title": "Browse",
         "description": "Browse all files uploaded by your and your friends"
+    },
+    "file": {
+        "title": "File details"
     }
 }

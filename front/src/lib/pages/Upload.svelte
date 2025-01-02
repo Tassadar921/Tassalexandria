@@ -4,14 +4,18 @@
     import Form from '../shared/Form.svelte';
     import FileUpload from '../shared/FileUpload.svelte';
     import { showToast } from '../../services/toastService.js';
-    import TagSelector from '../shared/TagSelector.svelte';
+    import TagSelector from '../upload/TagSelector.svelte';
+    import { navigate } from "../../stores/locationStore.js";
+    import Input from "../shared/Input.svelte";
 
+    let title = '';
     let selectedTags = [];
     let file = null;
     let isValid = false;
 
-    const handleSuccess = () => {
+    const handleSuccess = (event) => {
         showToast($t('toast.upload.success'));
+        navigate(`/file/${event.detail.fileId}`);
     };
 
     const handleError = () => {
@@ -24,6 +28,14 @@
 <Title title={$t('upload.title')} hasBackground={true} />
 
 <Form method="post" action="/api/upload" on:success={handleSuccess} on:error={handleError} bind:isValid>
+    <Input
+        name="title"
+        placeholder={$t('common.title.placeholder')}
+        label={$t('common.title.label')}
+        bind:value={title}
+        required={true}
+    />
+
     <TagSelector bind:selectedTags />
 
     {#each selectedTags as tag}

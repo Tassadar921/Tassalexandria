@@ -20,6 +20,7 @@
     import { setLanguage } from './stores/languageStore.js';
     import Upload from './lib/pages/Upload.svelte';
     import Browse from './lib/pages/Browse.svelte';
+    import File from "./lib/pages/File.svelte";
 
     export let url = '';
 
@@ -76,6 +77,7 @@
 
                     <Route path="/upload"><Upload /></Route>
                     <Route path="/browse"><Browse /></Route>
+                    <Route path="/file/:id" let:params><File {...params} /></Route>
 
                     <Route path="/profile"><Profile /></Route>
                     <Route path="/logout"><Logout /></Route>

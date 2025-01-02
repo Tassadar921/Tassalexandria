@@ -7,7 +7,7 @@ import Tag from '#models/tag';
 import UploadedFileRepository from '#repositories/uploaded_file_repository';
 import UploadedFile from '#models/uploaded_file';
 import { cuid } from '@adonisjs/core/helpers';
-import app from '@adonisjs/core/services/app';
+import app from '@adonisjs/core/services/app'
 import File from '#models/file';
 import SlugifyService from '#services/slugify_service';
 import FileTag from '#models/file_tag';
@@ -29,9 +29,37 @@ export default class FileUploadController {
         });
     }
 
+    public async getFile({ request, response }: HttpContext): Promise<void> {
+        const { fileId } = request.params();
+
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
+        if (!uploadedFile) {
+            return response.notFound({ error: 'File not found' });
+        }
+
+        return response.send({ file: uploadedFile.apiSerialize() });
+    }
+
+    public async download({ request, response }: HttpContext): Promise<void> {
+        const { fileId } = request.params();
+
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
+        if (!uploadedFile) {
+            return response.notFound({ error: 'File not found' });
+        }
+
+        console.log(uploadedFile.file.path);
+
+        return response.download(app.makePath(uploadedFile.file.path));
+    }
+
     public async upload({ request, auth, response }: HttpContext): Promise<void> {
         const user: User & { currentAccessToken: AccessToken } = await auth.use('api').authenticate();
-        const { tags } = request.only(['tags']);
+        const { title, tags } = request.only(['title', 'tags']);
+
+        if (!title) {
+            return response.badRequest({ error: 'Title is required' });
+        }
 
         const foundTags: Tag[] = [];
         for (const name of tags) {
@@ -66,6 +94,7 @@ export default class FileUploadController {
             await file.refresh();
 
             const uploadedFile: UploadedFile = await UploadedFile.create({
+                title,
                 userId: user.id,
                 fileId: file.id,
             });

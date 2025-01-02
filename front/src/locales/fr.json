@@ -9,6 +9,12 @@
         "back-to-home": "Retour à la page d'accueil",
         "search": "Rechercher ...",
         "name": "Nom",
+        "created-at": "Créé le",
+        "updated-at": "Mis à jour le",
+        "title": {
+            "label": "Titre",
+            "placeholder": "Photo de Jésus"
+        },
         "username": {
             "label": "Nom d'utilisateur",
             "placeholder": "Jean123"
@@ -65,6 +71,9 @@
                 "success": "Profil mis à jour",
                 "error": "Une erreur est survenue lors de la mise à jour du profil"
             }
+        },
+        "tags": {
+            "error": "Une erreur est survenue lors de la récupération des tags"
         },
         "upload": {
             "success": "Fichier sauvegardé",
@@ -134,5 +143,8 @@
     "browse": {
         "title": "Parcourir",
         "description": "Parcourez les fichiers uploadés par vous et vos amis"
+    },
+    "file": {
+        "title": "Détails du fichier"
     }
 }

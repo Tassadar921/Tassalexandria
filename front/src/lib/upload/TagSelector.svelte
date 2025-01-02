@@ -1,6 +1,6 @@
 <script>
     import { t } from 'svelte-i18n';
-    import Search from './Search.svelte';
+    import Search from '../shared/Search.svelte';
     import axios from 'axios';
     import { onMount } from 'svelte';
     import TagItem from './TagItem.svelte';
@@ -45,10 +45,14 @@
     };
 
     const getItemsRequest = async () => {
-        const { data } = await axios.post(`/api/tags?query=${query}`, {
-            excludedNames: selectedTags.map((tag) => tag.name),
-        });
-        tags = data.tags;
+        try {
+            const { data } = await axios.post(`/api/tags?query=${query}`, {
+                excludedNames: selectedTags.map((tag) => tag.name),
+            });
+            tags = data.tags;
+        } catch (e) {
+
+        }
     };
 </script>
 

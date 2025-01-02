@@ -12,6 +12,9 @@ export default class UploadedFile extends BaseModel {
     declare id: string;
 
     @column()
+    declare title: string;
+
+    @column()
     declare frontId: number;
 
     @column()
@@ -38,6 +41,7 @@ export default class UploadedFile extends BaseModel {
     public apiSerialize(): SerializedUploadedFile {
         return {
             id: this.frontId,
+            title: this.title,
             user: this.owner.apiSerialize(),
             file: this.file.apiSerialize(),
             fileTags: this.fileTags.map((fileTag: FileTag): SerializedFileTag => fileTag.apiSerialize()),
