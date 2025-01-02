@@ -7,6 +7,7 @@
     import TagSelector from '../upload/TagSelector.svelte';
     import { navigate } from "../../stores/locationStore.js";
     import Input from "../shared/Input.svelte";
+    import Editable from "../shared/Editable.svelte";
 
     let title = '';
     let selectedTags = [];
@@ -34,6 +35,8 @@
         label={$t('common.title.label')}
         bind:value={title}
         required={true}
+        min={3}
+        max={50}
     />
 
     <TagSelector bind:selectedTags />

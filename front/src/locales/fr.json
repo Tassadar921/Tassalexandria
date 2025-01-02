@@ -78,6 +78,18 @@
         "upload": {
             "success": "Fichier sauvegardé",
             "error": "Une erreur est survenue lors de la sauvegarde du fichier"
+        },
+        "file": {
+            "fetch": {
+                "error": "Une erreur est survenue lors de la récupération du fichier"
+            },
+            "download": {
+                "error": "Une erreur est survenue lors du téléchargement du fichier"
+            },
+            "rename": {
+                "success": "Fichié renommé",
+                "error": "Une erreur est survenue lors du renommage du fichier"
+            }
         }
     },
     "menu": {

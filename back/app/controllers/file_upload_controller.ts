@@ -40,7 +40,7 @@ export default class FileUploadController {
         return response.send({ file: uploadedFile.apiSerialize() });
     }
 
-    public async download({ request, response }: HttpContext): Promise<void> {
+    public async rename({ request, response }: HttpContext): Promise<void> {
         const { fileId } = request.params();
 
         const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
@@ -48,7 +48,21 @@ export default class FileUploadController {
             return response.notFound({ error: 'File not found' });
         }
 
-        console.log(uploadedFile.file.path);
+        const { title } = request.only(['title']);
+        console.log(title);
+        uploadedFile.title = title;
+        await uploadedFile.save();
+
+        return response.send({ message: 'File renamed' });
+    }
+
+    public async download({ request, response }: HttpContext): Promise<void> {
+        const { fileId } = request.params();
+
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
+        if (!uploadedFile) {
+            return response.notFound({ error: 'File not found' });
+        }
 
         return response.download(app.makePath(uploadedFile.file.path));
     }

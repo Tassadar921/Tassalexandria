@@ -6,10 +6,10 @@
     import Tag from "../file/Tag.svelte";
     import { language } from '../../stores/languageStore';
     import Subtitle from "../shared/Subtitle.svelte";
-    import Icon from "../shared/Icon.svelte";
-    import IconButton from "../shared/IconButton.svelte";
     import Fab from "../shared/Fab.svelte";
     import Button from "../shared/Button.svelte";
+    import Editable from "../shared/Editable.svelte";
+    import {showToast} from "../../services/toastService.js";
 
     export let id;
 
@@ -32,7 +32,7 @@
             const { data } = await axios.get(`/api/file/${id}`);
             uploadedFile = data.file;
         } catch (e) {
-
+            showToast($t('toast.file.fetch.error'), 'error');
         }
     });
 
@@ -54,7 +54,22 @@
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
         } catch (e) {
-            console.log(e.response.data);
+            showToast($t('toast.file.download.error'), 'error');
+        }
+    };
+
+    const handleRename = async () => {
+        try {
+            const response = await axios.post(`/api/file/${id}/rename`, {
+                title: uploadedFile.title,
+            });
+            if (response.status === 200) {
+                showToast($t('toast.file.rename.success'));
+            } else {
+                showToast($t('toast.file.rename.error'), 'error');
+            }
+        } catch (e) {
+            showToast($t('toast.file.rename.error'), 'error');
         }
     };
 
@@ -64,9 +79,10 @@
     }
 </script>
 
-<Title title={uploadedFile?.title ?? $t('file.title')} />
-
 {#if uploadedFile}
+    <Editable bind:value={uploadedFile.title} min={3} max={50} className="text-3xl font-bold mb-2" iconClassName="mt-1" on:rename={handleRename}>
+        <Title title={uploadedFile?.title} />
+    </Editable>
     <Subtitle>{$t('common.created-at')}: {createdAt}</Subtitle>
     <Subtitle>{$t('common.updated-at')}: {updatedAt}</Subtitle>
     <div class="flex gap-3 flex-wrap mt-2">
@@ -82,4 +98,6 @@
         </div>
     {/if}
     <Fab horizontal="middle" vertical="bottom" icon="download" on:click={handleDownload} />
+{:else}
+    <Title title={$t('file.title')} />
 {/if}

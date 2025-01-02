@@ -78,6 +78,18 @@
         "upload": {
             "success": "File saved",
             "error": "An error occurred while saving file"
+        },
+        "file": {
+            "fetch": {
+                "error": "An error occurred while fetching file"
+            },
+            "download": {
+                "error": "An error occurred while downloading file"
+            },
+            "rename": {
+                "success": "File renamed",
+                "error": "An error occurred while renaming file"
+            }
         }
     },
     "menu": {
