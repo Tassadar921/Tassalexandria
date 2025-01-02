@@ -5,8 +5,8 @@
     import { onMount } from 'svelte';
     import TagItem from './TagItem.svelte';
     import SelectedTag from './SelectedTag.svelte';
-    import IconButton from "../shared/IconButton.svelte";
-    import {showToast} from "../../services/toastService.js";
+    import IconButton from '../shared/IconButton.svelte';
+    import { showToast } from '../../services/toastService.js';
 
     export let selectedTags = [];
     export let update = false;
@@ -85,11 +85,7 @@
     </div>
 {/if}
 
-<div
-    class="relative inline-block w-full"
-    on:focusin={() => (menuOpen = true)}
-    on:focusout={handleFocusOut}
->
+<div class="relative inline-block w-full" on:focusin={() => (menuOpen = true)} on:focusout={handleFocusOut}>
     <Search label={$t('upload.search-tags')} bind:search={query} {handleSearch} minChars={0} />
 
     <div

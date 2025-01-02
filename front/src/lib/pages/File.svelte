@@ -9,7 +9,7 @@
     import Button from '../shared/Button.svelte';
     import Editable from '../shared/Editable.svelte';
     import { showToast } from '../../services/toastService.js';
-    import TagSelector from "../upload/TagSelector.svelte";
+    import TagSelector from '../upload/TagSelector.svelte';
 
     export let id;
 
@@ -33,7 +33,7 @@
         try {
             const { data } = await axios.get(`/api/file/${id}`);
             uploadedFile = data.file;
-            selectedTags = uploadedFile?.fileTags?.map(fileTag => fileTag.tag) ?? [];
+            selectedTags = uploadedFile?.fileTags?.map((fileTag) => fileTag.tag) ?? [];
         } catch (e) {
             showToast($t('toast.file.fetch.error'), 'error');
         }

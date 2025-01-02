@@ -11,7 +11,7 @@ import app from '@adonisjs/core/services/app';
 import File from '#models/file';
 import SlugifyService from '#services/slugify_service';
 import FileTag from '#models/file_tag';
-import FileService from "#services/file_service";
+import FileService from '#services/file_service';
 
 @inject()
 export default class FileUploadController {
@@ -19,7 +19,7 @@ export default class FileUploadController {
         private readonly fileService: FileService,
         private readonly tagRepository: TagRepository,
         private readonly uploadedFileRepository: UploadedFileRepository,
-        private readonly slugifyService: SlugifyService,
+        private readonly slugifyService: SlugifyService
     ) {}
     public async getTags({ request, response }: HttpContext): Promise<void> {
         const fileId = request.qs().fileId;
