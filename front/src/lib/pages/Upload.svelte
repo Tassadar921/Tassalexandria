@@ -1,10 +1,10 @@
 <script>
-    import Title from "../shared/Title.svelte";
+    import Title from '../shared/Title.svelte';
     import { t } from 'svelte-i18n';
-    import Form from "../shared/Form.svelte";
-    import FileUpload from "../shared/FileUpload.svelte";
-    import {showToast} from "../../services/toastService.js";
-    import TagSelector from "../shared/TagSelector.svelte";
+    import Form from '../shared/Form.svelte';
+    import FileUpload from '../shared/FileUpload.svelte';
+    import { showToast } from '../../services/toastService.js';
+    import TagSelector from '../shared/TagSelector.svelte';
 
     let selectedTags = [];
     let file = null;
@@ -30,10 +30,5 @@
         <input value={tag.name} name="tags" type="hidden" />
     {/each}
 
-    <FileUpload
-        name="file"
-        accept="png jpg gif jpeg webp mp3 mp4 mov"
-        title={$t('upload.file.title')}
-        bind:file
-    />
+    <FileUpload name="file" accept="png jpg gif jpeg webp mp3 mp4 mov" title={$t('upload.file.title')} bind:file />
 </Form>

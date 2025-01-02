@@ -1,15 +1,15 @@
 <script>
     import { t } from 'svelte-i18n';
-    import Search from "./Search.svelte";
+    import Search from './Search.svelte';
     import axios from 'axios';
-    import {onMount} from "svelte";
-    import TagItem from "./TagItem.svelte";
-    import SelectedTag from "./SelectedTag.svelte";
+    import { onMount } from 'svelte';
+    import TagItem from './TagItem.svelte';
+    import SelectedTag from './SelectedTag.svelte';
 
     export let selectedTags = [];
 
     let menuOpen = false;
-    let query = "";
+    let query = '';
 
     let tags = [];
     let filteredTags = [];
@@ -25,9 +25,7 @@
     };
 
     const handleSearch = async () => {
-        filteredTags = tags.filter(item =>
-            item.name.toLowerCase().includes(query.toLowerCase())
-        );
+        filteredTags = tags.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
         await getItemsRequest();
     };
 
@@ -41,7 +39,7 @@
 
     const getItemsRequest = async () => {
         const { data } = await axios.post(`/api/tags?query=${query}`, {
-            excludedNames: selectedTags.map(tag => tag.name),
+            excludedNames: selectedTags.map((tag) => tag.name),
         });
         tags = data.tags;
     };
@@ -53,17 +51,8 @@
     {/each}
 </div>
 
-<div
-    class="relative inline-block w-full"
-    on:focusin={() => menuOpen = true}
-    on:focusout={handleFocusOut}
->
-    <Search
-        label={$t('upload.search-tags')}
-        bind:search={query}
-        {handleSearch}
-        minChars={0}
-    />
+<div class="relative inline-block w-full" on:focusin={() => (menuOpen = true)} on:focusout={handleFocusOut}>
+    <Search label={$t('upload.search-tags')} bind:search={query} {handleSearch} minChars={0} />
     <div id="myDropdown" class:show={menuOpen} class="dropdown-content max-h-96 overflow-y-scroll">
         <ul>
             {#if query.length}

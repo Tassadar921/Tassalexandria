@@ -1,5 +1,5 @@
 <script>
-    import Title from "../shared/Title.svelte";
+    import Title from '../shared/Title.svelte';
     import { t } from 'svelte-i18n';
 </script>
 

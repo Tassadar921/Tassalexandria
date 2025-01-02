@@ -4,20 +4,20 @@ import { AccessToken } from '@adonisjs/auth/access_tokens';
 import { inject } from '@adonisjs/core';
 import TagRepository from '#repositories/tag_repository';
 import Tag from '#models/tag';
-import UploadedFileRepository from "#repositories/uploaded_file_repository";
-import UploadedFile from "#models/uploaded_file";
-import {cuid} from "@adonisjs/core/helpers";
-import app from "@adonisjs/core/services/app";
-import File from "#models/file";
-import SlugifyService from "#services/slugify_service";
-import FileTag from "#models/file_tag";
+import UploadedFileRepository from '#repositories/uploaded_file_repository';
+import UploadedFile from '#models/uploaded_file';
+import { cuid } from '@adonisjs/core/helpers';
+import app from '@adonisjs/core/services/app';
+import File from '#models/file';
+import SlugifyService from '#services/slugify_service';
+import FileTag from '#models/file_tag';
 
 @inject()
 export default class FileUploadController {
     constructor(
         private readonly tagRepository: TagRepository,
         private readonly uploadedFileRepository: UploadedFileRepository,
-        private readonly slugifyService: SlugifyService,
+        private readonly slugifyService: SlugifyService
     ) {}
     public async getTags({ request, response }: HttpContext): Promise<void> {
         const fileId = request.qs().fileId;
@@ -25,7 +25,7 @@ export default class FileUploadController {
         const { excludedNames } = request.only(['excludedNames']);
 
         return response.send({
-            tags: await this.tagRepository.search(request.qs().query || '', excludedNames ?? [],  file),
+            tags: await this.tagRepository.search(request.qs().query || '', excludedNames ?? [], file),
         });
     }
 

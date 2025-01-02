@@ -1,8 +1,8 @@
 <script>
     import Icon from './Icon.svelte';
-    import {t} from 'svelte-i18n';
-    import {onMount} from 'svelte';
-    import {raw} from '../../services/stringService.js';
+    import { t } from 'svelte-i18n';
+    import { onMount } from 'svelte';
+    import { raw } from '../../services/stringService.js';
 
     export let name = '';
     export let description = '';
@@ -104,16 +104,15 @@
         on:keydown={handleKeyDown}
         aria-label="File uploader"
     >
-        <input id="file-upload" type="file" class="hidden" {name} accept={acceptedFormats}
-               on:change={handleFileChange}/>
+        <input id="file-upload" type="file" class="hidden" {name} accept={acceptedFormats} on:change={handleFileChange} />
         <span class="text-primary-500">
-            <Icon name="upload" size="35"/>
+            <Icon name="upload" size="35" />
         </span>
         <span class="text-center text-sm text-gray-500 my-3">
             {#if fileName}
                 {#if previewSrc}
                     <div class="mt-3 flex justify-center">
-                        <img src={previewSrc} alt="Preview" class="w-24 h-24 object-cover rounded"/>
+                        <img src={previewSrc} alt="Preview" class="w-24 h-24 object-cover rounded" />
                     </div>
                 {:else}
                     {fileName}

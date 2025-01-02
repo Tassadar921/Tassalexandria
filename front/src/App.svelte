@@ -18,8 +18,8 @@
     import AlreadyConnected from './lib/pages/AlreadyConnected.svelte';
     import Menu from './lib/menu/Menu.svelte';
     import { setLanguage } from './stores/languageStore.js';
-    import Upload from "./lib/pages/Upload.svelte";
-    import Browse from "./lib/pages/Browse.svelte";
+    import Upload from './lib/pages/Upload.svelte';
+    import Browse from './lib/pages/Browse.svelte';
 
     export let url = '';
 

@@ -11,12 +11,13 @@
             icon: 'upload',
             href: '/upload',
             description: $t('upload.description'),
-        }, {
+        },
+        {
             title: $t('browse.title'),
             icon: 'search',
             href: '/browse',
             description: $t('browse.description'),
-        }
+        },
     ];
 </script>
 

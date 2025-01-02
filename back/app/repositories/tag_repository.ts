@@ -17,7 +17,11 @@ export default class TagRepository extends BaseRepository<typeof Tag> {
             queryBuilder = queryBuilder.leftJoin('file_tags', 'tags.id', 'file_tags.tag_id').where('file_tags.uploaded_file_id', uploadedFile.id);
         }
 
-        const tags: Tag[] = await queryBuilder.andWhere('tags.name', 'ILIKE', `%${query}%`).andWhereNotIn('tags.name', excludedNames).orderBy('tags.name').limit(25);
+        const tags: Tag[] = await queryBuilder
+            .andWhere('tags.name', 'ILIKE', `%${query}%`)
+            .andWhereNotIn('tags.name', excludedNames)
+            .orderBy('tags.name')
+            .limit(25);
 
         return tags.map((tag: Tag): SerializedTag => {
             return tag.apiSerialize();

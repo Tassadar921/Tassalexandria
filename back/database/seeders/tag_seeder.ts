@@ -5,7 +5,7 @@ import Tag from '#models/tag';
 export default class extends BaseSeeder {
     async run(): Promise<void> {
         const tagRepository: TagRepository = new TagRepository();
-        const tags: { name: string, red: number, green: number, blue: number }[] = [
+        const tags: { name: string; red: number; green: number; blue: number }[] = [
             { name: 'Singe', red: 125, green: 85, blue: 12 },
             { name: 'Paul', red: 210, green: 50, blue: 75 },
             { name: 'Gabriel', red: 60, green: 130, blue: 190 },
