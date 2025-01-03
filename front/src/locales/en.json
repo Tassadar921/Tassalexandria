@@ -160,7 +160,10 @@
     },
     "browse": {
         "title": "Browse",
-        "description": "Browse all files uploaded by your and your friends"
+        "description": "Browse all files uploaded by your and your friends",
+        "search": {
+            "label": "Search by file name"
+        }
     },
     "file": {
         "title": "File details"

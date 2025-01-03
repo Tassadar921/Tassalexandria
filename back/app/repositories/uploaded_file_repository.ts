@@ -35,9 +35,15 @@ export default class UploadedFileRepository extends BaseRepository<typeof Upload
                     .orWhere('users.username', 'ILIKE', `%${query}%`);
             })
             .if(tags.length > 0, (queryBuilder): void => {
-                queryBuilder.andWhere((subQuery): void => {
-                    subQuery.whereIn('tags.name', tags);
-                });
+                queryBuilder.andWhereRaw(`
+            (
+                SELECT COUNT(DISTINCT tags.name)
+                FROM file_tags
+                INNER JOIN tags ON tags.id = file_tags.tag_id
+                WHERE file_tags.uploaded_file_id = uploaded_files.id
+                AND tags.name IN (${tags.map((): string => '?').join(', ')})
+            ) = ?
+        `, [...tags, tags.length]); // Bind tag names and count
             })
             .preload('owner')
             .preload('file')

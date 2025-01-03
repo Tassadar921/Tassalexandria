@@ -5,7 +5,6 @@
     const dispatch = createEventDispatcher();
 
     export let tag;
-    export let search = false;
 </script>
 
 <button
@@ -15,9 +14,7 @@
     on:click={() => dispatch('delete')}
 >
     <span>{tag.name}</span>
-    {#if !search}
-        <span class="group-hover:text-primary-500">
-            <Icon name="close" />
-        </span>
-    {/if}
+    <span class="group-hover:text-primary-500">
+        <Icon name="close" />
+    </span>
 </button>

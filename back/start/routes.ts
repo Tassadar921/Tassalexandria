@@ -27,6 +27,7 @@ router
 
                 router.post('/tags', [FileUploadController, 'getTags']);
                 router.post('/upload', [FileUploadController, 'upload']);
+                router.post('/tags-details', [FileController, 'getTagsDetails']);
 
                 router
                     .group((): void => {

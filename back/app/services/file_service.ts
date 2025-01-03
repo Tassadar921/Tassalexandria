@@ -16,19 +16,26 @@ export default class FileService {
         });
     }
 
-    public async getFoundTags(tags: string[]): Promise<Tag[]> {
+    public async getFoundTags(tags: string | string[]): Promise<Tag[]> {
+        if (typeof tags === 'string') {
+            return [await this.getTag(tags)]
+        }
         const foundTags: Tag[] = [];
         for (const name of tags) {
-            const red: number = Math.floor(Math.random() * 255);
-            const green: number = Math.floor(Math.random() * 255);
-            const blue: number = Math.floor(Math.random() * 255);
-
-            const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
-            await tag.refresh();
-
-            foundTags.push(tag);
+            foundTags.push(await this.getTag(name));
         }
 
         return foundTags;
+    }
+
+    private async getTag(name: string): Promise<Tag> {
+        const red: number = Math.floor(Math.random() * 255);
+        const green: number = Math.floor(Math.random() * 255);
+        const blue: number = Math.floor(Math.random() * 255);
+
+        const tag: Tag = await this.tagRepository.firstOrCreate({ name }, { name, red, green, blue });
+        await tag.refresh();
+
+        return tag;
     }
 }

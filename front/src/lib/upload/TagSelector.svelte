@@ -13,7 +13,6 @@
 
     export let selectedTags = [];
     export let update = false;
-    export let search = false;
     export let id = null;
 
     let menuOpen = false;
@@ -43,6 +42,7 @@
         selectedTags = selectedTags.filter((item) => item.name !== tag.name);
         await getItemsRequest();
         isSaveDisabled = false;
+        dispatch('delete');
     };
 
     const selectItem = async (item) => {
@@ -80,7 +80,7 @@
 
 <div class="flex gap-3 flex-wrap">
     {#each selectedTags as tag}
-        <SelectedTag {tag} on:delete={() => handleDeleteTag(tag)} {search} />
+        <SelectedTag {tag} on:delete={() => handleDeleteTag(tag)} />
     {/each}
 </div>
 

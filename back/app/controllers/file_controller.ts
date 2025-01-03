@@ -6,6 +6,7 @@ import app from '@adonisjs/core/services/app';
 import FileTag from '#models/file_tag';
 import Tag from '#models/tag';
 import FileService from '#services/file_service';
+import SerializedTag from "#types/serialized/serialized_tag";
 
 @inject()
 export default class FileController {
@@ -82,6 +83,16 @@ export default class FileController {
         }
 
         return response.send({ message: 'Tags updated' });
+    }
+
+    public async getTagsDetails({ request, response }: HttpContext): Promise<void> {
+        const { tags } = request.only(['tags']);
+
+        if (tags && Array.isArray(tags)) {
+            const foundTags: Tag[] = await this.fileService.getFoundTags(tags);
+            return response.send({ tags: foundTags.map((tag: Tag): SerializedTag => tag.apiSerialize() )});
+        }
+        return response.send({ tags: [] });
     }
 
     public async search({ request, response }: HttpContext): Promise<void> {
