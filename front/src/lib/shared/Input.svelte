@@ -29,8 +29,10 @@
     const switchType = () => (type = type === 'password' ? 'text' : 'password');
 
     const inputAttributes = {
-        ...(min !== null && { min }),
-        ...(max !== null && { max }),
+        ...(min !== null && realType !== 'text' && { min }),
+        ...(max !== null && realType !== 'text' && { max }),
+        ...(realType === 'text' && min !== null && { minlength: min }),
+        ...(realType === 'text' && max !== null && { maxlength: max }),
     };
 
     const handleFocus = () => {
