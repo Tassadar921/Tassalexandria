@@ -39,7 +39,7 @@
         max={50}
     />
 
-    <TagSelector bind:selectedTags />
+    <TagSelector bind:selectedTags allowCreateTag={true} />
 
     {#each selectedTags as tag}
         <input value={tag.name} name="tags" type="hidden" />

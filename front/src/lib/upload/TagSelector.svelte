@@ -13,6 +13,7 @@
 
     export let selectedTags = [];
     export let update = false;
+    export let allowCreateTag = false;
     export let id = null;
 
     let menuOpen = false;
@@ -33,9 +34,29 @@
         }
     };
 
-    const handleSearch = async () => {
-        filteredTags = tags.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
-        await getItemsRequest();
+    const handleSearch = async (event) => {
+        const searchTerm = query.toLowerCase();
+        filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
+
+        if (event.detail) { // 'Enter' key is pressed
+            const foundTag = tags.find((item) => item.name.toLowerCase() === searchTerm);
+            if (foundTag) {
+                await selectItem(foundTag, false); // Select the tag without a new request
+                menuOpen = false;
+            } else if (allowCreateTag) {
+                const newTag = { name: query }; // Example: Adjust according to your schema
+                await selectItem(newTag, false);
+                showToast($t('toast.tags.created'), 'success');
+                menuOpen = false;
+            }
+        } else {
+            await getItemsRequest(); // Update tags for the query
+            filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
+        }
+
+        // Force DOM update
+        filteredTags = [...filteredTags];
+        menuOpen = true; // Ensure dropdown remains open
     };
 
     const handleDeleteTag = async (tag) => {
@@ -45,10 +66,12 @@
         dispatch('delete');
     };
 
-    const selectItem = async (item) => {
+    const selectItem = async (item, sendRequest = true) => {
         if (!selectedTags.includes(item)) {
             selectedTags = [...selectedTags, item];
-            await getItemsRequest();
+            if (sendRequest) {
+                await getItemsRequest();
+            }
             isSaveDisabled = false;
             dispatch('select');
         }
@@ -61,6 +84,7 @@
                 excludedNames: selectedTags.map((tag) => tag.name),
             });
             tags = data.tags;
+            console.log(tags.map(tag => tag.name));
         } catch (e) {
             showToast($t('toast.tags.error'), 'error');
         }
@@ -91,7 +115,7 @@
 {/if}
 
 <div class="relative inline-block w-full" on:focusin={() => (menuOpen = true)} on:focusout={handleFocusOut}>
-    <Search label={$t('upload.search-tags')} bind:search={query} {handleSearch} minChars={0} />
+    <Search label={$t('upload.search-tags')} bind:search={query} on:search={handleSearch} minChars={0} />
 
     <div
         id="myDropdown"
@@ -103,10 +127,12 @@
             {#if query.length}
                 {#each filteredTags as tag}
                     <TagItem {tag} on:select={(event) => selectItem(event.detail)} />
+                    <p>ici</p>
                 {/each}
             {:else}
                 {#each tags as tag}
                     <TagItem {tag} on:select={(event) => selectItem(event.detail)} />
+                    <p>là</p>
                 {/each}
             {/if}
         </ul>

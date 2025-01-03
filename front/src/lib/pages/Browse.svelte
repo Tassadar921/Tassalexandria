@@ -61,7 +61,7 @@
 <Title title={$t('browse.title')}/>
 
 <div class="flex flex-col gap-3 mb-3">
-    <Search label={$t('browse.search.label')} bind:search={query} handleSearch={search} minChars={0} />
+    <Search label={$t('browse.search.label')} bind:search={query} on:search={search} minChars={0} />
     <TagSelector bind:selectedTags on:select={search} on:delete={search} />
 
     {#if paginated?.uploadedFiles?.uploadedFiles?.length}

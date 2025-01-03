@@ -11,7 +11,6 @@
     export let name = '';
     export let disabled = false;
     export let label = '';
-    export let handleSearch = () => null;
     export let selected = false;
     export let results = [];
     export let selectedObserver = false;
@@ -24,12 +23,16 @@
             results = [];
             return;
         }
-        handleSearch(search);
+        dispatch('search');
     };
 
-    const searchDebounced = () => {
+    const searchDebounced = (e) => {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(searchFunction, debounce);
+        if (e.key === 'Enter') {
+            dispatch('search', true);
+        } else {
+            searchTimeout = setTimeout(searchFunction, debounce);
+        }
     };
 
     const handleFocus = () => {
