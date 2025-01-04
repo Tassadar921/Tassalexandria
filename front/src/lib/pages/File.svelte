@@ -15,7 +15,6 @@
 
     let uploadedFile = null;
     let selectedTags = [];
-    let tagsUpdated = false;
     let createdAt;
     let updatedAt;
 
@@ -96,7 +95,7 @@
             <Button customStyle={true} className="mt-10" on:click={handleDownload}>
                 <img
                     alt={uploadedFile.title}
-                    src={`${process.env.VITE_TASSADAPI_BASE_URL}/${uploadedFile.file.path}`}
+                    src={`${process.env.VITE_TASSADAPI_BASE_URL}/api/static/${uploadedFile.id}`}
                     class="w-64 m-auto rounded-2xl"
                 />
             </Button>

@@ -84,7 +84,6 @@
                 excludedNames: selectedTags.map((tag) => tag.name),
             });
             tags = data.tags;
-            console.log(tags.map(tag => tag.name));
         } catch (e) {
             showToast($t('toast.tags.error'), 'error');
         }

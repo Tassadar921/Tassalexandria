@@ -9,10 +9,10 @@ import { CorsConfig } from '@adonisjs/cors/types';
  */
 const corsConfig: CorsConfig = defineConfig({
     enabled: true,
-    origin: '*',
+    origin: true,
     methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
     headers: true,
-    exposeHeaders: [],
+    exposeHeaders: ['Content-Disposition'],
     credentials: true,
     maxAge: 90,
 });

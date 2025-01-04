@@ -45,15 +45,20 @@ export default class FileController {
         return response.send({ message: 'File renamed' });
     }
 
-    public async download({ request, response }: HttpContext): Promise<void> {
+    public async serveStaticFile({ request, response }: HttpContext): Promise<void> {
         const { fileId } = request.params();
 
-        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneForDetails(fileId);
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneBy({ frontId: fileId }, ['file']);
         if (!uploadedFile) {
             return response.notFound({ error: 'File not found' });
         }
 
-        return response.download(app.makePath(uploadedFile.file.path));
+        response.header('Access-Control-Allow-Origin', '*'); // Replace '*' with your frontend URL if needed
+        response.header('Content-Type', 'application/octet-stream'); // Modify as per the file type
+        response.header('Content-Disposition', `attachment; filename="${uploadedFile.title}"`);
+        response.header('Content-Type', uploadedFile.file.mimeType);
+
+        return response.download(app.publicPath(uploadedFile.file.path));
     }
 
     public async updateTags({ request, response }: HttpContext): Promise<void> {
