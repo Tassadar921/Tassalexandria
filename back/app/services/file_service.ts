@@ -17,8 +17,11 @@ export default class FileService {
     }
 
     public async getFoundTags(tags: string | string[]): Promise<Tag[]> {
+        if (!tags) {
+            return [];
+        }
         if (typeof tags === 'string') {
-            return [await this.getTag(tags)]
+            return [await this.getTag(tags)];
         }
         const foundTags: Tag[] = [];
         for (const name of tags) {

@@ -35,7 +35,8 @@ export default class UploadedFileRepository extends BaseRepository<typeof Upload
                     .orWhere('users.username', 'ILIKE', `%${query}%`);
             })
             .if(tags.length > 0, (queryBuilder): void => {
-                queryBuilder.andWhereRaw(`
+                queryBuilder.andWhereRaw(
+                    `
             (
                 SELECT COUNT(DISTINCT tags.name)
                 FROM file_tags
@@ -43,7 +44,9 @@ export default class UploadedFileRepository extends BaseRepository<typeof Upload
                 WHERE file_tags.uploaded_file_id = uploaded_files.id
                 AND tags.name IN (${tags.map((): string => '?').join(', ')})
             ) = ?
-        `, [...tags, tags.length]); // Bind tag names and count
+        `,
+                    [...tags, tags.length]
+                );
             })
             .preload('owner')
             .preload('file')

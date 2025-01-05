@@ -15,7 +15,6 @@
 
     let uploadedFile = null;
     let selectedTags = [];
-    let tagsUpdated = false;
     let createdAt;
     let updatedAt;
 
@@ -41,7 +40,7 @@
 
     const handleDownload = async () => {
         try {
-            const response = await axios.get(`${uploadedFile.file.path}`, {
+            const response = await axios.get(`/api/static/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`, {
                 responseType: 'blob',
             });
 
@@ -96,7 +95,7 @@
             <Button customStyle={true} className="mt-10" on:click={handleDownload}>
                 <img
                     alt={uploadedFile.title}
-                    src={`${process.env.VITE_TASSADAPI_BASE_URL}/${uploadedFile.file.path}`}
+                    src={`${process.env.VITE_TASSADAPI_BASE_URL}/api/static/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
                     class="w-64 m-auto rounded-2xl"
                 />
             </Button>

@@ -9,7 +9,7 @@ import { AssetsConfig } from '@adonisjs/static/types';
  * https://docs.adonisjs.com/guides/static-assets
  */
 const staticServerConfig: AssetsConfig = defineConfig({
-    enabled: true,
+    enabled: false,
     etag: true,
     lastModified: true,
     dotFiles: 'ignore',

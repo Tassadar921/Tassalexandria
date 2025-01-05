@@ -1,10 +1,11 @@
-import RoleEnum from '#types/enum/role_enum';
+import UserRoleEnum from '#types/enum/user_role_enum';
 import SerializedFile from '#types/serialized/serialized_file';
 
 type SerializedUser = {
+    id: number;
     username: string;
     email: string;
-    role: RoleEnum;
+    role: UserRoleEnum;
     enabled: boolean;
     profilePicture?: SerializedFile;
     updatedAt?: string;

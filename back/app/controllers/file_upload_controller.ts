@@ -48,8 +48,8 @@ export default class FileUploadController {
 
         if (inputFile && inputFile.isValid && inputFile.tmpPath) {
             inputFile.clientName = `${cuid()}-${this.slugifyService.slugify(inputFile.clientName)}`;
-            const path = `upload/${user.email}`;
-            await inputFile.move(app.publicPath(path));
+            const path = `static/upload/${user.frontId}`;
+            await inputFile.move(app.makePath(path));
             const file: File = await File.create({
                 name: inputFile.clientName,
                 path: `${path}/${inputFile.clientName}`,
