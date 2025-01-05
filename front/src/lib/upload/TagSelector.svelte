@@ -38,7 +38,8 @@
         const searchTerm = query.toLowerCase();
         filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
 
-        if (event.detail) { // 'Enter' key is pressed
+        if (event.detail) {
+            // 'Enter' key is pressed
             const foundTag = tags.find((item) => item.name.toLowerCase() === searchTerm);
             if (foundTag) {
                 await selectItem(foundTag, false); // Select the tag without a new request

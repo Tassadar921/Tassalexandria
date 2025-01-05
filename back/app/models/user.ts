@@ -20,6 +20,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
     declare id: string;
 
     @column()
+    declare frontId: number;
+
+    @column()
     declare username: string;
 
     @column()
@@ -40,7 +43,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
     @column()
     declare fileId: string | null;
 
-    @belongsTo(() => File)
+    @belongsTo((): typeof File => File)
     declare profilePicture: BelongsTo<typeof File>;
 
     @hasMany((): typeof UploadedFile => UploadedFile)
@@ -62,6 +65,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
     public apiSerialize(): SerializedUser {
         return {
+            id: this.frontId,
             username: this.username,
             email: this.email,
             role: this.role,

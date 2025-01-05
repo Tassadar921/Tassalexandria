@@ -53,7 +53,7 @@ router
             })
             .use([middleware.auth({ guards: ['api'] })]);
 
-            router.get('/static/:fileId', [FileController, 'serveStaticFile']);
+        router.get('/static/:fileId', [FileController, 'serveStaticFile']).use([middleware.queryStringAuth()]);
     })
     .prefix('api')
     .use([middleware.language()]);

@@ -1,12 +1,12 @@
 <script>
     import Title from '../shared/Title.svelte';
     import { t } from 'svelte-i18n'; // Ensure correct import alias for `$t`
-    import { onMount } from "svelte";
-    import axios from "axios";
-    import { showToast } from "../../services/toastService.js";
-    import TagSelector from "../upload/TagSelector.svelte";
-    import Link from "../shared/Link.svelte";
-    import Search from "../shared/Search.svelte";
+    import { onMount } from 'svelte';
+    import axios from 'axios';
+    import { showToast } from '../../services/toastService.js';
+    import TagSelector from '../upload/TagSelector.svelte';
+    import Link from '../shared/Link.svelte';
+    import Search from '../shared/Search.svelte';
 
     let query = '';
     let selectedTags = [];
@@ -45,7 +45,7 @@
         params.set('query', query);
 
         if (selectedTags.length > 0) {
-            params.set('tags', selectedTags.map(tag => tag.name).join(','));
+            params.set('tags', selectedTags.map((tag) => tag.name).join(','));
         }
 
         const searchParams = params.toString();
@@ -58,7 +58,7 @@
     };
 </script>
 
-<Title title={$t('browse.title')}/>
+<Title title={$t('browse.title')} />
 
 <div class="flex flex-col gap-3 mb-3">
     <Search label={$t('browse.search.label')} bind:search={query} on:search={search} minChars={0} />
@@ -70,7 +70,7 @@
                 <Link href={`/file/${uploadedFile.id}`} className="flex items-center justify-center group">
                     <img
                         alt={uploadedFile.title}
-                        src={`${process.env.VITE_TASSADAPI_BASE_URL}/${uploadedFile.file.path}`}
+                        src={`${process.env.VITE_TASSADAPI_BASE_URL}/api/static/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
                         class="w-64 rounded-2xl group-hover:border group-hover:border-primary-500"
                     />
                 </Link>
