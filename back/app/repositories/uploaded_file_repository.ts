@@ -46,7 +46,7 @@ export default class UploadedFileRepository extends BaseRepository<typeof Upload
             ) = ?
         `,
                     [...tags, tags.length]
-                ); // Bind tag names and count
+                );
             })
             .preload('owner')
             .preload('file')
