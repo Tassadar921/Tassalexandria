@@ -46,7 +46,7 @@
     };
 
     onMount(async () => {
-        axios.defaults.baseURL = process.env.VITE_TASSADAPI_BASE_URL;
+        axios.defaults.baseURL = process.env.VITE_API_BASE_URL;
         await defineCustomElements(window);
         setLanguage(localStorage.getItem('language'));
 

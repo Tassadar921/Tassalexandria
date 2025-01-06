@@ -95,7 +95,7 @@
             <Button customStyle={true} className="mt-10" on:click={handleDownload}>
                 <img
                     alt={uploadedFile.title}
-                    src={`${process.env.VITE_TASSADAPI_BASE_URL}/api/static/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
+                    src={`${process.env.VITE_API_BASE_URL}/api/static/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
                     class="w-64 m-auto rounded-2xl"
                 />
             </Button>

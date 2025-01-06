@@ -1,9 +1,9 @@
 {
-    "name": "tassadapi",
+    "name": "tassalexandria",
     "version": "0.0.0",
     "private": true,
     "type": "module",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "scripts": {
         "start": "node bin/server.js",
         "install:prod": "rm -rf node_modules && rm package-lock.json && npm install --only=prod",

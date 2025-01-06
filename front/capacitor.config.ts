@@ -6,7 +6,7 @@ const config: {
     webContentsDebuggingEnabled: boolean;
 } = {
     appId: 'com.example.mysveltekitapp',
-    appName: 'Tassadraft-v2',
+    appName: 'Tassalexandria',
     webDir: 'dist',
     loggingBehavior: 'production',
     webContentsDebuggingEnabled: false,

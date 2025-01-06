@@ -15,7 +15,7 @@
 
     let acceptedFormats = '';
     let isDragging = false;
-    let previewSrc = `${process.env.VITE_TASSADAPI_BASE_URL}/${path}`;
+    let previewSrc = `${process.env.VITE_API_BASE_URL}/${path}`;
 
     onMount(() => {
         title = title ?? $t('common.file.description');
