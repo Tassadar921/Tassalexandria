@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
         "start": "node bin/server.js",
-        "install:prod": "rm -rf node_modules && rm package-lock.json && npm ci --omit=\"dev\"",
+        "install:prod": "rm -rf node_modules && npm ci --omit=\"dev\"",
         "build": "[ -d build/public ] && cp -r build/public tmp_build_public && [ -d build/static ] && cp -r build/static tmp_build_static && node ace build && cp -r public build && cp -r static build && cp .env build/.env && npm run install:prod && pm2 stop tassalexandria || true && pm2 delete tassalexandria || true && pm2 start bin/server.js --name tassalexandria --env PORT=3001 && cd ../ && rsync -av --progress tmp_build_public/ build/public/ && rsync -av --progress tmp_build_static/ build/static/ && rm -rf tmp_build_public tmp_build_static",
         "dev": "node ace serve --hmr",
         "test": "node ace test",
