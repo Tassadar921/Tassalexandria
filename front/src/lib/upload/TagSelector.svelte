@@ -39,25 +39,23 @@
         filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
 
         if (event.detail) {
-            // 'Enter' key is pressed
             const foundTag = tags.find((item) => item.name.toLowerCase() === searchTerm);
             if (foundTag) {
-                await selectItem(foundTag, false); // Select the tag without a new request
+                await selectItem(foundTag, false);
                 menuOpen = false;
             } else if (allowCreateTag) {
-                const newTag = { name: query }; // Example: Adjust according to your schema
+                const newTag = { name: query };
                 await selectItem(newTag, false);
-                showToast($t('toast.tags.created'), 'success');
+                showToast($t('toast.tags.created'));
                 menuOpen = false;
             }
         } else {
-            await getItemsRequest(); // Update tags for the query
+            await getItemsRequest();
             filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
         }
 
-        // Force DOM update
         filteredTags = [...filteredTags];
-        menuOpen = true; // Ensure dropdown remains open
+        menuOpen = true;
     };
 
     const handleDeleteTag = async (tag) => {
@@ -127,12 +125,10 @@
             {#if query.length}
                 {#each filteredTags as tag}
                     <TagItem {tag} on:select={(event) => selectItem(event.detail)} />
-                    <p>ici</p>
                 {/each}
             {:else}
                 {#each tags as tag}
                     <TagItem {tag} on:select={(event) => selectItem(event.detail)} />
-                    <p>là</p>
                 {/each}
             {/if}
         </ul>
