@@ -12,6 +12,7 @@ import File from '#models/file';
 import SlugifyService from '#services/slugify_service';
 import FileTag from '#models/file_tag';
 import FileService from '#services/file_service';
+import RegexService from '#services/regex_service';
 
 @inject()
 export default class FileUploadController {
@@ -19,8 +20,10 @@ export default class FileUploadController {
         private readonly fileService: FileService,
         private readonly tagRepository: TagRepository,
         private readonly uploadedFileRepository: UploadedFileRepository,
-        private readonly slugifyService: SlugifyService
+        private readonly slugifyService: SlugifyService,
+        private readonly regexService: RegexService
     ) {}
+
     public async getTags({ request, response }: HttpContext): Promise<void> {
         const fileId = request.qs().fileId;
         const file: UploadedFile | null = fileId ? await this.uploadedFileRepository.findOneBy({ frontId: fileId }) : null;
@@ -37,6 +40,8 @@ export default class FileUploadController {
 
         if (!title) {
             return response.badRequest({ error: 'Title is required' });
+        } else if (!this.regexService.isValidFileTitle(title)) {
+            return response.badRequest({ error: 'Emojis are forbidden into file title' });
         }
 
         const foundTags: Tag[] = await this.fileService.getFoundTags(tags);

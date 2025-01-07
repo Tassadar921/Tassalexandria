@@ -7,12 +7,14 @@ import FileTag from '#models/file_tag';
 import Tag from '#models/tag';
 import FileService from '#services/file_service';
 import SerializedTag from '#types/serialized/serialized_tag';
+import RegexService from '#services/regex_service';
 
 @inject()
 export default class FileController {
     constructor(
         private readonly fileService: FileService,
-        private readonly uploadedFileRepository: UploadedFileRepository
+        private readonly uploadedFileRepository: UploadedFileRepository,
+        private readonly regexService: RegexService
     ) {}
 
     public async get({ request, response }: HttpContext): Promise<void> {
@@ -37,6 +39,8 @@ export default class FileController {
         const { title } = request.only(['title']);
         if (!title) {
             return response.badRequest({ error: 'Title is required' });
+        } else if (!this.regexService.isValidFileTitle(title)) {
+            return response.badRequest({ error: 'Emojis are forbidden into file title' });
         }
 
         uploadedFile.title = title;
@@ -53,8 +57,8 @@ export default class FileController {
             return response.notFound({ error: 'File not found' });
         }
 
-        response.header('Access-Control-Allow-Origin', '*'); // Replace '*' with your frontend URL if needed
-        response.header('Content-Type', 'application/octet-stream'); // Modify as per the file type
+        response.header('Access-Control-Allow-Origin', '*');
+        response.header('Content-Type', 'application/octet-stream');
         response.header('Content-Disposition', `attachment; filename="${uploadedFile.title}"`);
         response.header('Content-Type', uploadedFile.file.mimeType);
 

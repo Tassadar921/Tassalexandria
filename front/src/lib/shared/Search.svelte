@@ -69,6 +69,7 @@
         placeholder={focused || search.length ? placeholder : ''}
         {name}
         {disabled}
+        pattern="^[^\uD83C-\uDBFF\uDC00-\uDFFF\u2600-\u26FF\u2700-\u27BF]*$"
         class="block w-full px-3 py-2 mt-1 text-base text-gray-800 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
     />
 </div>
