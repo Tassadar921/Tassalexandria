@@ -19,7 +19,7 @@
         <div class="px-1">
             <ul class="p-4">
                 <li class="p-2">
-                    <p class="text-center">© 2024 Tassadraft Studio</p>
+                    <p class="text-center">© 2025 Tassadraft Studio</p>
                 </li>
             </ul>
         </div>
