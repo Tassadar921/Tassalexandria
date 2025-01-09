@@ -9,7 +9,7 @@
     import Button from '../shared/Button.svelte';
     import Editable from '../shared/Editable.svelte';
     import { showToast } from '../../services/toastService.js';
-    import TagSelector from '../upload/TagSelector.svelte';
+    import TagSelector from '../shared/TagSelector.svelte';
 
     export let id;
 

@@ -4,7 +4,7 @@
     import Form from '../shared/Form.svelte';
     import FileUpload from '../shared/FileUpload.svelte';
     import { showToast } from '../../services/toastService.js';
-    import TagSelector from '../upload/TagSelector.svelte';
+    import TagSelector from '../shared/TagSelector.svelte';
     import { navigate } from '../../stores/locationStore.js';
     import Input from '../shared/Input.svelte';
     import Editable from '../shared/Editable.svelte';

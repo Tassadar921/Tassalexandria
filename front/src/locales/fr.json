@@ -73,7 +73,12 @@
             }
         },
         "tags": {
-            "error": "Une erreur est survenue lors de la récupération des tags"
+            "get": {
+                "error": "Une erreur est survenue lors de la récupération des tags"
+            },
+            "new": {
+                "error": "Une erreur est survenue lors de la création du tag"
+            }
         },
         "upload": {
             "success": "Fichier sauvegardé",

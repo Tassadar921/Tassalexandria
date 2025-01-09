@@ -11,7 +11,7 @@
         "preinstall": "node install.js",
         "format": "npx prettier --write .",
         "build:mobile:base": "npm run build && npx capacitor-assets generate",
-        "build:android:base": "npm run build:mobile:base && npx cap sync android && npx cap copy android",
+        "build:android:base": "npm run build:mobile:base  && npx cap copy android && npx cap sync android",
         "build:android:debug": " npm run build:android:base && cd android && ./gradlew assembleDebug",
         "build:android": " npm run build:android:base && cd android && ./gradlew assembleRelease"
     },

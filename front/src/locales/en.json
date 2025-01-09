@@ -73,7 +73,12 @@
             }
         },
         "tags": {
-            "error": "An error occurred while fetching tags"
+            "get": {
+                "error": "An error occurred while fetching tags"
+            },
+            "new": {
+                "error": "An error occurred while creating new tag"
+            }
         },
         "upload": {
             "success": "File saved",

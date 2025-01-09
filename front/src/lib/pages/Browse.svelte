@@ -4,7 +4,7 @@
     import { onMount } from 'svelte';
     import axios from 'axios';
     import { showToast } from '../../services/toastService.js';
-    import TagSelector from '../upload/TagSelector.svelte';
+    import TagSelector from '../shared/TagSelector.svelte';
     import Link from '../shared/Link.svelte';
     import Search from '../shared/Search.svelte';
 
@@ -23,7 +23,7 @@
 
         const tags = urlParams.get('tags');
         if (tags) {
-            const { data } = await axios.post('/api/tags-details', {
+            const { data } = await axios.post('/api/tags/details', {
                 tags: tags.split(','),
             });
             selectedTags = data.tags;

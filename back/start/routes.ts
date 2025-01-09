@@ -5,6 +5,7 @@ const AuthController = () => import('#controllers/auth_controller');
 const ProfileController = () => import('#controllers/profile_controller');
 const FileUploadController = () => import('#controllers/file_upload_controller');
 const FileController = () => import('#controllers/file_controller');
+const TagController = () => import('#controllers/tag_controller');
 
 // API requests
 router
@@ -25,9 +26,15 @@ router
 
                 router.get('/logout', [AuthController, 'logout']);
 
-                router.post('/tags', [FileUploadController, 'getTags']);
                 router.post('/upload', [FileUploadController, 'upload']);
-                router.post('/tags-details', [FileController, 'getTagsDetails']);
+
+                router
+                    .group((): void => {
+                        router.post('/', [TagController, 'getTags']);
+                        router.post('/new', [TagController, 'new']);
+                        router.post('/details', [TagController, 'getTagsDetails']);
+                    })
+                    .prefix('/tags');
 
                 router
                     .group((): void => {
@@ -38,7 +45,7 @@ router
                                 router.get('/', [FileController, 'get']);
                                 router.get('/download', [FileController, 'serveStaticFile']);
                                 router.post('/rename', [FileController, 'rename']);
-                                router.post('/tags', [FileController, 'updateTags']);
+                                router.post('/tags', [TagController, 'updateTags']);
                             })
                             .prefix('/:fileId');
                     })

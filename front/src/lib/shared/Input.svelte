@@ -72,7 +72,6 @@
             {readonly}
             bind:this={inputRef}
             class={classes}
-            pattern="^[^\uD83C-\uDBFF\uDC00-\uDFFF\u2600-\u26FF\u2700-\u27BF]*$"
             {...inputAttributes}
         />
     {:else if type === 'password'}
@@ -87,7 +86,6 @@
             {disabled}
             {readonly}
             class={`${classes} pr-9`}
-            pattern="^[^\uD83C-\uDBFF\uDC00-\uDFFF\u2600-\u26FF\u2700-\u27BF]*$"
             {...inputAttributes}
         />
         <Button additionalStyle="absolute top-2 right-2 cursor-pointer" on:click={switchType}>
@@ -105,7 +103,6 @@
             {disabled}
             {readonly}
             class={`${classes} pr-9`}
-            pattern="^[^\uD83C-\uDBFF\uDC00-\uDFFF\u2600-\u26FF\u2700-\u27BF]*$"
             {...inputAttributes}
         />
         <Button additionalStyle="absolute top-2 right-2 cursor-pointer" on:click={switchType}>

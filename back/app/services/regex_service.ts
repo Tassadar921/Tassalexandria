@@ -21,4 +21,9 @@ export default class RegexService {
         const isValidTitleRegex = /^[^\uD83C-\uDBFF\uDC00-\uDFFF\u2600-\u26FF\u2700-\u27BF]*$/;
         return isValidTitleRegex.test(title);
     }
+
+    public isValidTagName(name: string): boolean {
+        const isValidTagNameRegex = /^[^\uD83C-\uDBFF\uDC00-\uDFFF\u2600-\u26FF\u2700-\u27BF]*$/;
+        return isValidTagNameRegex.test(name);
+    }
 }

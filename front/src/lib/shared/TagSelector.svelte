@@ -1,11 +1,11 @@
 <script>
     import { t } from 'svelte-i18n';
-    import Search from '../shared/Search.svelte';
+    import Search from './Search.svelte';
     import axios from 'axios';
     import { onMount } from 'svelte';
     import TagItem from './TagItem.svelte';
     import SelectedTag from './SelectedTag.svelte';
-    import IconButton from '../shared/IconButton.svelte';
+    import IconButton from './IconButton.svelte';
     import { showToast } from '../../services/toastService.js';
     import { createEventDispatcher } from 'svelte';
 
@@ -35,23 +35,28 @@
     };
 
     const handleSearch = async (event) => {
-        const searchTerm = query.toLowerCase();
-        filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
+        if (!query) {
+            return;
+        }
+        filteredTags = tags.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
 
         if (event.detail) {
-            const foundTag = tags.find((item) => item.name.toLowerCase() === searchTerm);
+            const foundTag = tags.find((item) => item.name.toLowerCase() === query.toLowerCase());
             if (foundTag) {
                 await selectItem(foundTag, false);
                 menuOpen = false;
             } else if (allowCreateTag) {
-                const newTag = { name: query };
-                await selectItem(newTag, false);
-                showToast($t('toast.tags.created'));
-                menuOpen = false;
+                try {
+                    const { data } = await axios.post('/api/tags/new', { name: query.toLowerCase() });
+                    await selectItem(data.tag, false);
+                    menuOpen = false;
+                } catch (e) {
+                    showToast($t('toast.tags.new.error'), 'error');
+                }
             }
         } else {
             await getItemsRequest();
-            filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchTerm));
+            filteredTags = tags.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
         }
 
         filteredTags = [...filteredTags];
@@ -65,9 +70,9 @@
         dispatch('delete');
     };
 
-    const selectItem = async (item, sendRequest = true) => {
-        if (!selectedTags.includes(item)) {
-            selectedTags = [...selectedTags, item];
+    const selectItem = async (tag, sendRequest = true) => {
+        if (!selectedTags.find((item) => item.name.toLowerCase() === tag.name.toLowerCase())) {
+            selectedTags = [...selectedTags, tag];
             if (sendRequest) {
                 await getItemsRequest();
             }
@@ -84,7 +89,7 @@
             });
             tags = data.tags;
         } catch (e) {
-            showToast($t('toast.tags.error'), 'error');
+            showToast($t('toast.tags.get.error'), 'error');
         }
     };
 
