@@ -1,4 +1,4 @@
-package com.example.mysveltekitapp;
+package com.tassadraft.tassalexandria;
 
 import com.getcapacitor.BridgeActivity;
 
