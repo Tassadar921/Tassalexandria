@@ -10,7 +10,7 @@
 <li>
     <Button
         customStyle={true}
-        className="w-full text-left  p-3 hover:bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-600 transition-colors duration-300"
+        className="w-full text-left  p-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 hover:dark:bg-gray-600 transition-colors duration-300"
         ariaLabel={tag}
         on:click={(event) => {
             event.stopPropagation();
