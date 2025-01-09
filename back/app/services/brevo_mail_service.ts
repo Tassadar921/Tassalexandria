@@ -1,9 +1,7 @@
 import axios from 'axios';
 import env from '#start/env';
-import { inject } from '@adonisjs/core';
 import User from '#models/user';
 
-@inject()
 export default class BrevoMailService {
     private apiUrl: string = 'https://api.brevo.com/v3/smtp/email';
 

@@ -9,3 +9,7 @@ public/assets/
 
 # Ignore test snapshots
 **/__snapshots__/**
+
+# Ignore mobile build files
+public/manifest.webmanifest
+ios/App/App/Assets.xcassets/AppIcon.appiconset/Contents.json

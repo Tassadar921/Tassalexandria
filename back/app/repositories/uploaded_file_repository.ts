@@ -1,11 +1,9 @@
 import BaseRepository from '#repositories/base/base_repository';
-import { inject } from '@adonisjs/core';
 import UploadedFile from '#models/uploaded_file';
 import { ModelPaginatorContract } from '@adonisjs/lucid/types/model';
 import PaginatedUploadedFile from '#types/paginated/paginated_uploaded_file';
 import SerializedUploadedFile from '#types/serialized/serialized_uploaded_file';
 
-@inject()
 export default class UploadedFileRepository extends BaseRepository<typeof UploadedFile> {
     constructor() {
         super(UploadedFile);

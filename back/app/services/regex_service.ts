@@ -1,6 +1,3 @@
-import { inject } from '@adonisjs/core';
-
-@inject()
 export default class RegexService {
     public isValidUri(uri: string): boolean {
         const isValidUriRegex = /^(https?|ftp):\/\/[^\s\/$.?#].\S*$/i;

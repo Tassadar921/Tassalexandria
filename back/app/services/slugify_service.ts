@@ -1,6 +1,3 @@
-import { inject } from '@adonisjs/core';
-
-@inject()
 export default class SlugifyService {
     public slugify(text: string): string {
         return text
