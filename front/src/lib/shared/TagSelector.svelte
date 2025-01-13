@@ -39,9 +39,6 @@
             return;
         }
 
-        // prevent IOS form submission on key 'Enter'
-        event.preventDefault();
-
         filteredTags = tags.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
 
         if (event.detail) {

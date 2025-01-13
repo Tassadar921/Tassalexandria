@@ -10,8 +10,8 @@ tmp
 .env.development.local
 
 # Assets & compiled code
-public/upload
 static/upload
+static/profile-picture
 
 # Build tools specific
 npm-debug.log

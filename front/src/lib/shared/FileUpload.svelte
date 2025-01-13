@@ -9,13 +9,14 @@
     export let title = null;
     export let width = '96';
     export let accept = '';
-    export let path = '';
     export let fileName = '';
     export let file = null;
+    export let pathPrefix;
+    export let id;
 
     let acceptedFormats = '';
     let isDragging = false;
-    let previewSrc = `${process.env.VITE_API_BASE_URL}/${path}`;
+    let previewSrc = `${process.env.VITE_API_BASE_URL}/api/static/${pathPrefix}/${id}?token=${localStorage.getItem('apiToken')}`;
 
     onMount(() => {
         title = title ?? $t('common.file.description');
@@ -26,8 +27,7 @@
             .join(',');
     });
 
-    const handleFileChange = (event) => {
-        const files = event.target.files;
+    const processFiles = (files) => {
         if (files.length > 0) {
             file = files[0];
             fileName = file.name;
@@ -46,6 +46,10 @@
             fileName = '';
             previewSrc = '';
         }
+    };
+
+    const handleFileChange = (event) => {
+        processFiles(event.target.files);
     };
 
     const handleDragOver = (event) => {
@@ -60,25 +64,7 @@
     const handleDrop = (event) => {
         event.preventDefault();
         isDragging = false;
-        const files = event.dataTransfer.files;
-        if (files.length > 0) {
-            file = files[0];
-            fileName = file.name;
-
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    previewSrc = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                previewSrc = '';
-            }
-        } else {
-            file = null;
-            fileName = '';
-            previewSrc = '';
-        }
+        processFiles(event.dataTransfer.files);
     };
 
     const handleKeyDown = (event) => {

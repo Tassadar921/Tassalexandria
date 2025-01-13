@@ -63,9 +63,10 @@
     <FileUpload
         name="profilePicture"
         accept="png jpg gif jpeg webp"
-        path={$profile.profilePicture?.path}
         fileName={$profile.profilePicture?.name}
         title={$t('profile.profile-picture.title')}
         description={$t('profile.profile-picture.description')}
+        pathPrefix="profile-picture"
+        id={$profile.id}
     />
 </Form>

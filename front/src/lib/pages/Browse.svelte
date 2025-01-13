@@ -70,7 +70,7 @@
                 <Link href={`/file/${uploadedFile.id}`} className="flex items-center justify-center group">
                     <img
                         alt={uploadedFile.title}
-                        src={`${process.env.VITE_API_BASE_URL}/api/static/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
+                        src={`${process.env.VITE_API_BASE_URL}/api/static/upload/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
                         class="w-64 rounded-2xl group-hover:border group-hover:border-primary-500"
                     />
                 </Link>

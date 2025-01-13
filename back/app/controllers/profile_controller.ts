@@ -128,7 +128,7 @@ export default class ProfileController {
 
         const profilePicture = request.file('profilePicture', {
             size: '2mb',
-            extnames: ['jpg', 'png', 'gif'],
+            extnames: ['jpg', 'png', 'gif', 'jpeg'],
         });
 
         await user.load('profilePicture');
@@ -141,8 +141,8 @@ export default class ProfileController {
                 await user.profilePicture.delete();
             }
             profilePicture.clientName = `${cuid()}-${this.slugifyService.slugify(profilePicture.clientName)}`;
-            const path = `upload/profile-picture`;
-            await profilePicture.move(app.publicPath(path));
+            const path = `static/profile-picture`;
+            await profilePicture.move(app.makePath(path));
             const file: File = await File.create({
                 name: profilePicture.clientName,
                 path: `${path}/${profilePicture.clientName}`,

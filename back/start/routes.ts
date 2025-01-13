@@ -39,11 +39,10 @@ router
                 router
                     .group((): void => {
                         router.get('/search', [FileController, 'search']);
-                        router.get('/static/:path', [FileController, 'serveStaticFile']);
                         router
                             .group((): void => {
                                 router.get('/', [FileController, 'get']);
-                                router.get('/download', [FileController, 'serveStaticFile']);
+                                router.get('/download', [FileController, 'serveStaticUploadedFile']);
                                 router.post('/rename', [FileController, 'rename']);
                                 router.post('/tags', [TagController, 'updateTags']);
                             })
@@ -60,7 +59,8 @@ router
             })
             .use([middleware.auth({ guards: ['api'] })]);
 
-        router.get('/static/:fileId', [FileController, 'serveStaticFile']).use([middleware.queryStringAuth()]);
+        router.get('/static/upload/:fileId', [FileController, 'serveStaticUploadedFile']).use([middleware.queryStringAuth()]);
+        router.get('/static/profile-picture/:userId', [FileController, 'serveStaticProfilePictureFile']).use([middleware.queryStringAuth()]);
     })
     .prefix('api')
     .use([middleware.language()]);

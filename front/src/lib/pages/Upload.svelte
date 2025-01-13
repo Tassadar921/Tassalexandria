@@ -7,7 +7,7 @@
     import TagSelector from '../shared/TagSelector.svelte';
     import { navigate } from '../../stores/locationStore.js';
     import Input from '../shared/Input.svelte';
-    import Editable from '../shared/Editable.svelte';
+    import { profile } from '../../stores/profileStore.js';
 
     let title = '';
     let selectedTags = [];
@@ -45,5 +45,12 @@
         <input value={tag.name} name="tags" type="hidden" />
     {/each}
 
-    <FileUpload name="file" accept="png jpg gif jpeg webp mp3 mp4 mov" title={$t('upload.file.title')} bind:file />
+    <FileUpload
+        name="file"
+        accept="png jpg gif jpeg webp mp3 mp4 mov"
+        title={$t('upload.file.title')}
+        bind:file
+        pathPrefix="upload"
+        id={$profile.id}
+    />
 </Form>
