@@ -7,6 +7,7 @@ type SerializedUploadedFile = {
     title: string;
     user: SerializedUser;
     file: SerializedFile;
+    thumbnail?: SerializedFile;
     fileTags: SerializedFileTag[];
     createdAt?: string;
     updatedAt?: string;

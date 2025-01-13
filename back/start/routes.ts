@@ -59,7 +59,8 @@ router
             })
             .use([middleware.auth({ guards: ['api'] })]);
 
-        router.get('/static/upload/:fileId', [FileController, 'serveStaticUploadedFile']).use([middleware.queryStringAuth()]);
+        router.get('/static/thumbnail/:fileId', [FileController, 'serveStaticThumbnailFile']).use([middleware.queryStringAuth()]);
+        router.get('/static/file/:fileId', [FileController, 'serveStaticUploadedFile']).use([middleware.queryStringAuth()]);
         router.get('/static/profile-picture/:userId', [FileController, 'serveStaticProfilePictureFile']).use([middleware.queryStringAuth()]);
     })
     .prefix('api')

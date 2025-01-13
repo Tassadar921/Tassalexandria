@@ -79,6 +79,10 @@
         createdAt = new Date(uploadedFile.createdAt).toLocaleDateString($language, dateOptions);
         updatedAt = new Date(uploadedFile.updatedAt).toLocaleDateString($language, dateOptions);
     }
+
+    // Default assets for missing or loading media
+    const defaultImage = '/assets/default/image.png';
+    const defaultVideo = '/assets/default/video.png';
 </script>
 
 {#if uploadedFile}
@@ -90,18 +94,40 @@
     <div class="mt-3">
         <TagSelector bind:selectedTags update={true} {id} />
     </div>
-    {#if uploadedFile.file.mimeType.split('/')[0] === 'image'}
+    {#if uploadedFile.file.mimeType.startsWith('image')}
         <div class="w-full flex justify-center">
             <Button customStyle={true} className="mt-10" on:click={handleDownload}>
                 <img
                     alt={uploadedFile.title}
-                    src={`${process.env.VITE_API_BASE_URL}/api/static/upload/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
-                    class="w-64 m-auto rounded-2xl"
+                    src={uploadedFile?.id
+                        ? `${process.env.VITE_API_BASE_URL}/api/static/upload/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`
+                        : defaultImage}
+                    class="max-h-96 rounded-2xl"
+                    onerror="this.src='/assets/default/image.png'"
                 />
             </Button>
         </div>
+    {:else if uploadedFile.file.mimeType.startsWith('video')}
+        <div class="w-full flex justify-center">
+            <!-- svelte-ignore a11y-media-has-caption -->
+            <video
+                src={uploadedFile?.id
+                    ? `${process.env.VITE_API_BASE_URL}/api/static/file/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`
+                    : defaultVideo}
+                class="mt-10 max-h-96 rounded-2xl"
+                controls
+                onerror="this.src='/assets/default/video.png'"
+            />
+        </div>
+    {:else}
+        <Button customStyle={true} className="mt-10" on:click={handleDownload}>
+            <img alt={uploadedFile.title} src={defaultImage} class="max-h-96 rounded-2xl" />
+        </Button>
     {/if}
     <Fab horizontal="middle" vertical="bottom" icon="download" on:click={handleDownload} />
 {:else}
     <Title title={$t('file.title')} />
+    <div class="w-full flex justify-center mt-10">
+        <img src={defaultImage} alt="Default Placeholder" class="max-h-96 rounded-2xl" />
+    </div>
 {/if}

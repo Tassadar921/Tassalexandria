@@ -11,6 +11,9 @@ import SlugifyService from '#services/slugify_service';
 import FileTag from '#models/file_tag';
 import FileService from '#services/file_service';
 import RegexService from '#services/regex_service';
+import ffmpeg from 'fluent-ffmpeg';
+import fs from 'fs/promises';
+import { Stats } from "node:fs";
 
 @inject()
 export default class FileUploadController {
@@ -56,6 +59,33 @@ export default class FileUploadController {
                 fileId: file.id,
             });
             await uploadedFile.refresh();
+
+            if (file.mimeType.startsWith('video')) {
+                const thumbnailName: string = `${file.name.split('.')[0]}-thumbnail.png`;
+                await new Promise((resolve, reject): void => {
+                    ffmpeg(app.makePath(file.path))
+                        .on('end', resolve)
+                        .on('error', reject)
+                        .output(`${app.makePath(path)}/${thumbnailName}`)
+                        .videoFilters('crop=iw:iw*9/16')
+                        .setStartTime(0)
+                        .frames(1)
+                        .run();
+                });
+
+                const thumbnailStats: Stats = await fs.stat(app.makePath(`${path}/${thumbnailName}`));
+                const thumbnail: File = await File.create({
+                    name: thumbnailName,
+                    path: `${path}/${thumbnailName}`,
+                    extension: 'png',
+                    mimeType: 'image/png',
+                    size: thumbnailStats.size,
+                });
+                await thumbnail.refresh();
+
+                uploadedFile.thumbnailId = thumbnail.id;
+                await uploadedFile.save();
+            }
 
             for (const tag of foundTags) {
                 await FileTag.create({
