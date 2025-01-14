@@ -84,8 +84,6 @@
     const defaultImage = '/assets/default/image.png';
     const defaultVideo = '/assets/default/video.png';
     const defaultDocument = '/assets/default/document.png';
-
-    $: console.log(uploadedFile?.file);
 </script>
 
 {#if uploadedFile}
@@ -143,7 +141,7 @@
             </Button>
         {/if}
 
-        <p><span class="dark:text-white lowercase">{size} {$t(getUnitNotation(uploadedFile.file.size))}</span></p>
+        <p><span class="dark:text-white">{size} {$t(getUnitNotation(uploadedFile.file.size))}</span></p>
     </div>
     <Fab horizontal="middle" vertical="bottom" icon="download" on:click={handleDownload} />
 {:else}

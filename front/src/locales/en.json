@@ -48,7 +48,7 @@
             "gb": "GB",
             "mb": "MB",
             "kb": "KB",
-            "b": "Bytes"
+            "b": "B"
         }
     },
     "toast": {

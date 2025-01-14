@@ -10,7 +10,7 @@ const getUnitNotation = (size) => {
     } else if (size >= 1000000) {
         return 'common.size.mb';
     } else if (size >= 1000) {
-        return 'common.size.Kb';
+        return 'common.size.kb';
     } else {
         return 'common.size.b';
     }
