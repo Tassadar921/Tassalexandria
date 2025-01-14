@@ -55,7 +55,7 @@
         <div class="order-1 md:order-2">
             <FileUpload
                 name="file"
-                accept="png jpg gif jpeg webp mp3 mp4 mov txt"
+                accept="png jpg gif jpeg webp mp3 mp4 mov txt docx xls xlsx pdf"
                 title={$t('upload.file.title')}
                 bind:file
                 pathPrefix="upload"

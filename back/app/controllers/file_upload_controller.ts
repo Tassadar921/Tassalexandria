@@ -37,7 +37,7 @@ export default class FileUploadController {
 
         const inputFile = request.file('file', {
             size: '5mb',
-            extnames: ['jpg', 'png', 'gif', 'jpeg', 'webp', 'mp3', 'mp4', 'mov', 'txt'],
+            extnames: ['jpg', 'png', 'gif', 'jpeg', 'webp', 'mp3', 'mp4', 'mov', 'txt', 'docx', 'xls', 'xlsx', 'pdf'],
         });
 
         if (!inputFile) {
