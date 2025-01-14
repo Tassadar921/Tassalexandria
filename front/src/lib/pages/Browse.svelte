@@ -65,7 +65,7 @@
     <TagSelector bind:selectedTags on:select={search} on:delete={search} />
 
     {#if paginated?.uploadedFiles?.uploadedFiles?.length}
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-items-center items-center mt-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 justify-items-center items-center mt-5">
             {#each paginated.uploadedFiles.uploadedFiles as uploadedFile}
                 <BrowseItem {uploadedFile} />
             {/each}

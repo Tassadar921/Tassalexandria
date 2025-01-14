@@ -51,25 +51,29 @@
         <input value={tag.name} name="tags" type="hidden" />
     {/each}
 
-    <div class="flex gap-5 justify-center">
-        {#if !hideThumbnail}
+    <div class="flex flex-col md:flex-row gap-5 justify-center">
+        <div class="order-1 md:order-2">
             <FileUpload
-                name="thumbnail"
-                accept="png jpg gif jpeg webp"
-                title={$t('upload.thumbnail.title')}
-                bind:file={thumbnail}
+                name="file"
+                accept="png jpg gif jpeg webp mp3 mp4 mov txt"
+                title={$t('upload.file.title')}
+                bind:file
                 pathPrefix="upload"
                 id={$profile.id}
-                bind:disabled={hideThumbnail}
             />
+        </div>
+        {#if !hideThumbnail}
+            <div class="order-2 md:order-1">
+                <FileUpload
+                    name="thumbnail"
+                    accept="png jpg gif jpeg webp"
+                    title={$t('upload.thumbnail.title')}
+                    bind:file={thumbnail}
+                    pathPrefix="upload"
+                    id={$profile.id}
+                    bind:disabled={hideThumbnail}
+                />
+            </div>
         {/if}
-        <FileUpload
-            name="file"
-            accept="png jpg gif jpeg webp mp3 mp4 mov txt"
-            title={$t('upload.file.title')}
-            bind:file
-            pathPrefix="upload"
-            id={$profile.id}
-        />
     </div>
 </Form>

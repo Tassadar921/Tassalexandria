@@ -42,6 +42,13 @@
         "file": {
             "title": "Select a file",
             "description": "Drag & drop or click to select a file."
+        },
+        "size": {
+            "tb": "TB",
+            "gb": "GB",
+            "mb": "MB",
+            "kb": "KB",
+            "b": "Bytes"
         }
     },
     "toast": {

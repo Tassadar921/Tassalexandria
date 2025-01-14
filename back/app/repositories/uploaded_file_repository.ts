@@ -12,7 +12,9 @@ export default class UploadedFileRepository extends BaseRepository<typeof Upload
     public async findOneForDetails(frontId: string): Promise<UploadedFile | null> {
         return await UploadedFile.query()
             .where('frontId', frontId)
-            .preload('owner')
+            .preload('owner', (ownerQuery): void => {
+                ownerQuery.preload('profilePicture');
+            })
             .preload('file')
             .preload('fileTags', (fileTagsQuery): void => {
                 fileTagsQuery.preload('tag');

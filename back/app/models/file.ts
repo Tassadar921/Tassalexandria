@@ -28,17 +28,13 @@ export default class File extends BaseModel {
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     declare updatedAt: DateTime;
 
-    private bytesToMegabytes(bytes: number): number {
-        return Math.round((bytes * 100) / 1024 / 1024) / 100;
-    }
-
     public apiSerialize(): SerializedFile {
         return {
             name: this.name,
             path: this.path,
             extension: this.extension,
             mimeType: this.mimeType,
-            size: this.bytesToMegabytes(this.size),
+            size: this.size,
             createdAt: this.createdAt?.toString(),
             updatedAt: this.updatedAt?.toString(),
         };

@@ -9,7 +9,7 @@
 
 <button
     class="rounded-full px-2 py-1 relative flex gap-1 group"
-    style="background-color: rgba({tag.red}, {tag.green}, {tag.blue}, 0.8); opacity: 0.5;"
+    style="background-color: rgba({tag.red}, {tag.green}, {tag.blue}, 0.8); opacity: 0.7;"
     type="button"
     on:click={() => dispatch('delete')}
 >

@@ -12,7 +12,7 @@
     };
 </script>
 
-<Link href={`/file/${uploadedFile.id}`} className="flex items-center justify-center w-64 h-80 group">
+<Link href={`/file/${uploadedFile.id}`} className="flex items-center justify-center w-48 h-60 md:w-64 md:h-80 group">
     {#if imgError}
         <span class="absolute font-bold">{uploadedFile.title}</span>
     {/if}
