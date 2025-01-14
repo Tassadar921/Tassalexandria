@@ -42,6 +42,13 @@
         "file": {
             "title": "Select a file",
             "description": "Drag & drop or click to select a file."
+        },
+        "size": {
+            "tb": "TB",
+            "gb": "GB",
+            "mb": "MB",
+            "kb": "KB",
+            "b": "B"
         }
     },
     "toast": {
@@ -160,6 +167,9 @@
         "description": "Upload files to share with your friends",
         "file": {
             "title": "File to share"
+        },
+        "thumbnail": {
+            "title": "Thumbnail"
         },
         "search-tags": "Search tags"
     },

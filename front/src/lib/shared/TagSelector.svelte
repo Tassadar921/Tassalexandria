@@ -99,6 +99,7 @@
             await axios.post(`/api/file/${id}/tags`, {
                 tags: selectedTags.map((tag) => tag.name),
             });
+            isSaveDisabled = true;
             showToast($t('toast.file.tags.success'));
         } catch (e) {
             showToast($t('toast.file.tags.error'), 'error');
@@ -106,17 +107,14 @@
     };
 </script>
 
-<div class="flex gap-3 flex-wrap">
+<div class="flex gap-3 flex-wrap items-center">
     {#each selectedTags as tag}
         <SelectedTag {tag} on:delete={() => handleDeleteTag(tag)} />
     {/each}
-</div>
-
-{#if update}
-    <div class="mt-8 ml-3">
+    {#if update && !isSaveDisabled}
         <IconButton size="50" bind:disabled={isSaveDisabled} icon="save" on:click={updateRequest} />
-    </div>
-{/if}
+    {/if}
+</div>
 
 <div class="relative inline-block w-full" on:focusin={() => (menuOpen = true)} on:focusout={handleFocusOut}>
     <Search label={$t('upload.search-tags')} bind:search={query} on:search={handleSearch} minChars={0} />

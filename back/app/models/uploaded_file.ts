@@ -29,6 +29,14 @@ export default class UploadedFile extends BaseModel {
     @belongsTo((): typeof File => File)
     declare file: BelongsTo<typeof File>;
 
+    @column()
+    declare thumbnailId: string;
+
+    @belongsTo((): typeof File => File, {
+        foreignKey: 'thumbnailId',
+    })
+    declare thumbnail: BelongsTo<typeof File>;
+
     @hasMany((): typeof FileTag => FileTag)
     declare fileTags: HasMany<typeof FileTag>;
 
@@ -42,8 +50,9 @@ export default class UploadedFile extends BaseModel {
         return {
             id: this.frontId,
             title: this.title,
-            user: this.owner.apiSerialize(),
+            owner: this.owner.apiSerialize(),
             file: this.file.apiSerialize(),
+            thumbnail: this.thumbnail?.apiSerialize(),
             fileTags: this.fileTags.map((fileTag: FileTag): SerializedFileTag => fileTag.apiSerialize()),
             createdAt: this.createdAt?.toString(),
             updatedAt: this.updatedAt?.toString(),

@@ -42,6 +42,13 @@
         "file": {
             "title": "Sélectionnez un fichier",
             "description": "Glissez-déposez ou cliquez pour sélectionner un fichier."
+        },
+        "size": {
+            "tb": "To",
+            "gb": "Go",
+            "mb": "Mo",
+            "kb": "Ko",
+            "b": "o"
         }
     },
     "toast": {
@@ -160,6 +167,9 @@
         "description": "Uploadez des fichiers pour les partager avec vos amis",
         "file": {
             "title": "Fichier à partager"
+        },
+        "thumbnail": {
+            "title": "Miniature"
         },
         "search-tags": "Rechercher des tags"
     },

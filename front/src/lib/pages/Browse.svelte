@@ -1,12 +1,12 @@
 <script>
     import Title from '../shared/Title.svelte';
-    import { t } from 'svelte-i18n'; // Ensure correct import alias for `$t`
+    import { t } from 'svelte-i18n';
     import { onMount } from 'svelte';
     import axios from 'axios';
     import { showToast } from '../../services/toastService.js';
     import TagSelector from '../shared/TagSelector.svelte';
-    import Link from '../shared/Link.svelte';
     import Search from '../shared/Search.svelte';
+    import BrowseItem from '../browse/BrowseItem.svelte';
 
     let query = '';
     let selectedTags = [];
@@ -65,15 +65,9 @@
     <TagSelector bind:selectedTags on:select={search} on:delete={search} />
 
     {#if paginated?.uploadedFiles?.uploadedFiles?.length}
-        <div class="flex flex-wrap justify-around gap-5 mt-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 justify-items-center items-center mt-5">
             {#each paginated.uploadedFiles.uploadedFiles as uploadedFile}
-                <Link href={`/file/${uploadedFile.id}`} className="flex items-center justify-center group">
-                    <img
-                        alt={uploadedFile.title}
-                        src={`${process.env.VITE_API_BASE_URL}/api/static/upload/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`}
-                        class="w-64 rounded-2xl group-hover:border group-hover:border-primary-500"
-                    />
-                </Link>
+                <BrowseItem {uploadedFile} />
             {/each}
         </div>
     {/if}

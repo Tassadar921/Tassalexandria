@@ -47,15 +47,38 @@ export default class FileController {
         return response.send({ message: 'File renamed' });
     }
 
-    public async serveStaticUploadedFile({ request, response }: HttpContext): Promise<void> {
+    public async serveStaticThumbnailFile({ request, response }: HttpContext): Promise<void> {
         const { fileId } = request.params();
 
-        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneBy({ frontId: fileId }, ['file']);
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneBy({ frontId: fileId }, ['file', 'thumbnail']);
         if (!uploadedFile) {
             return response.notFound({ error: 'File not found' });
         }
 
-        return response.download(app.makePath(uploadedFile.file.path));
+        if (uploadedFile.file.mimeType.startsWith('image')) {
+            return response.download(app.makePath(uploadedFile.file.path));
+        } else {
+            if (uploadedFile.thumbnail) {
+                return response.download(app.makePath(uploadedFile.thumbnail.path));
+            } else {
+                return response.notFound();
+            }
+        }
+    }
+
+    public async serveStaticUploadedFile({ request, response }: HttpContext): Promise<void> {
+        const { fileId } = request.params();
+
+        const uploadedFile: UploadedFile | null = await this.uploadedFileRepository.findOneBy({ frontId: fileId }, ['file', 'thumbnail']);
+        if (!uploadedFile) {
+            return response.notFound({ error: 'File not found' });
+        }
+
+        if (uploadedFile.file) {
+            return response.download(app.makePath(uploadedFile.file.path));
+        }
+
+        return response.notFound();
     }
 
     public async serveStaticProfilePictureFile({ request, response }: HttpContext): Promise<void> {
