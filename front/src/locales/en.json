@@ -161,6 +161,9 @@
         "file": {
             "title": "File to share"
         },
+        "thumbnail": {
+            "title": "Thumbnail"
+        },
         "search-tags": "Search tags"
     },
     "browse": {

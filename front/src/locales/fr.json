@@ -161,6 +161,9 @@
         "file": {
             "title": "Fichier à partager"
         },
+        "thumbnail": {
+            "title": "Miniature"
+        },
         "search-tags": "Rechercher des tags"
     },
     "browse": {

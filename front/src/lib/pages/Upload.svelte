@@ -12,11 +12,14 @@
     let title = '';
     let selectedTags = [];
     let file = null;
+    let thumbnail = null;
     let isValid = false;
+    let hideThumbnail = true;
 
     const handleSuccess = (event) => {
+        console.log(event.detail);
         showToast($t('toast.upload.success'));
-        navigate(`/file/${event.detail.fileId}`);
+        // navigate(`/file/${event.detail.fileId}`);
     };
 
     const handleError = () => {
@@ -24,6 +27,9 @@
     };
 
     $: isValid = !!file;
+    $: {
+        hideThumbnail = file ? file.type.split('/')[0] === 'image' || file.type.split('/')[0] === 'video' : true;
+    }
 </script>
 
 <Title title={$t('upload.title')} hasBackground={true} />
@@ -45,12 +51,25 @@
         <input value={tag.name} name="tags" type="hidden" />
     {/each}
 
-    <FileUpload
-        name="file"
-        accept="png jpg gif jpeg webp mp3 mp4 mov"
-        title={$t('upload.file.title')}
-        bind:file
-        pathPrefix="upload"
-        id={$profile.id}
-    />
+    <div class="flex gap-5 justify-center">
+        {#if !hideThumbnail}
+            <FileUpload
+                name="thumbnail"
+                accept="png jpg gif jpeg webp"
+                title={$t('upload.thumbnail.title')}
+                bind:file={thumbnail}
+                pathPrefix="upload"
+                id={$profile.id}
+                bind:disabled={hideThumbnail}
+            />
+        {/if}
+        <FileUpload
+            name="file"
+            accept="png jpg gif jpeg webp mp3 mp4 mov txt"
+            title={$t('upload.file.title')}
+            bind:file
+            pathPrefix="upload"
+            id={$profile.id}
+        />
+    </div>
 </Form>

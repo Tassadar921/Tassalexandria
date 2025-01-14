@@ -13,10 +13,12 @@
     export let file = null;
     export let pathPrefix;
     export let id;
+    export let disabled = false; // New prop
 
     let acceptedFormats = '';
     let isDragging = false;
     let previewSrc = `${process.env.VITE_API_BASE_URL}/api/static/${pathPrefix}/${id}?token=${localStorage.getItem('apiToken')}`;
+    let inputRef;
 
     onMount(() => {
         title = title ?? $t('common.file.description');
@@ -25,9 +27,13 @@
             .split(' ')
             .map((format) => `.${format}`)
             .join(',');
+        console.log(previewSrc);
     });
 
     const processFiles = (files) => {
+        if (disabled) {
+            return;
+        }
         if (files.length > 0) {
             file = files[0];
             fileName = file.name;
@@ -49,27 +55,33 @@
     };
 
     const handleFileChange = (event) => {
-        processFiles(event.target.files);
+        if (!disabled) processFiles(event.target.files);
     };
 
     const handleDragOver = (event) => {
-        event.preventDefault();
-        isDragging = true;
+        if (!disabled) {
+            event.preventDefault();
+            isDragging = true;
+        }
     };
 
     const handleDragLeave = () => {
-        isDragging = false;
+        if (!disabled) {
+            isDragging = false;
+        }
     };
 
     const handleDrop = (event) => {
-        event.preventDefault();
-        isDragging = false;
-        processFiles(event.dataTransfer.files);
+        if (!disabled) {
+            event.preventDefault();
+            isDragging = false;
+            processFiles(event.dataTransfer.files);
+        }
     };
 
     const handleKeyDown = (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            document.getElementById('file-upload').click();
+        if (!disabled && (event.key === 'Enter' || event.key === ' ')) {
+            inputRef.click();
         }
     };
 </script>
@@ -81,16 +93,19 @@
     <button
         type="button"
         class={`w-${width} flex flex-col items-center justify-center border-2 border-gray-400 dark:border-white rounded-lg cursor-pointer transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-48 m-auto p-3`}
-        class:bg-blue-50={isDragging}
-        class:border-blue-500={isDragging}
-        on:click={() => document.getElementById('file-upload').click()}
+        class:bg-blue-50={isDragging && !disabled}
+        class:border-blue-500={isDragging && !disabled}
+        class:opacity-50={disabled}
+        class:cursor-not-allowed={disabled}
+        on:click={() => !disabled && inputRef.click()}
         on:dragover={handleDragOver}
         on:dragleave={handleDragLeave}
         on:drop={handleDrop}
         on:keydown={handleKeyDown}
         aria-label="File uploader"
+        {disabled}
     >
-        <input id="file-upload" type="file" class="hidden" {name} accept={acceptedFormats} on:change={handleFileChange} />
+        <input bind:this={inputRef} type="file" class="hidden" {name} accept={acceptedFormats} on:change={handleFileChange} {disabled} />
         <span class="text-primary-500">
             <Icon name="upload" size="35" />
         </span>

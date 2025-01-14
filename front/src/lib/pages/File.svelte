@@ -83,47 +83,65 @@
     // Default assets for missing or loading media
     const defaultImage = '/assets/default/image.png';
     const defaultVideo = '/assets/default/video.png';
+    const defaultDocument = '/assets/default/document.png';
+
+    $: console.log(uploadedFile?.file?.path);
 </script>
 
 {#if uploadedFile}
     <Editable bind:value={uploadedFile.title} min={3} max={50} className="text-3xl font-bold mb-2" iconClassName="mt-1" on:rename={handleRename}>
-        <Title title={uploadedFile?.title} />
+        <Title title={uploadedFile.title} />
     </Editable>
     <Subtitle>{$t('common.created-at')}: {createdAt}</Subtitle>
     <Subtitle>{$t('common.updated-at')}: {updatedAt}</Subtitle>
+    <Subtitle>
+        <div class="flex gap-3 flex-wrap">
+            {#if uploadedFile.owner.profilePicture}
+                <img
+                    alt={uploadedFile.owner.username}
+                    src={uploadedFile?.id
+                        ? `${process.env.VITE_API_BASE_URL}/api/static/profile-picture/${uploadedFile.owner.id}?token=${localStorage.getItem('apiToken')}`
+                        : defaultImage}
+                    class="w-10 rounded-full"
+                    onerror="this.src='/assets/default/image.png'"
+                />
+            {/if}
+            <p>{uploadedFile.owner.username}</p>
+        </div>
+    </Subtitle>
     <div class="mt-3">
         <TagSelector bind:selectedTags update={true} {id} />
     </div>
-    {#if uploadedFile.file.mimeType.startsWith('image')}
-        <div class="w-full flex justify-center">
+    <div class="w-full flex justify-center">
+        {#if uploadedFile.file.mimeType.startsWith('image')}
             <Button customStyle={true} className="mt-10" on:click={handleDownload}>
                 <img
                     alt={uploadedFile.title}
                     src={uploadedFile?.id
-                        ? `${process.env.VITE_API_BASE_URL}/api/static/upload/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`
+                        ? `${process.env.VITE_API_BASE_URL}/api/static/file/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`
                         : defaultImage}
                     class="max-h-96 rounded-2xl"
                     onerror="this.src='/assets/default/image.png'"
                 />
             </Button>
-        </div>
-    {:else if uploadedFile.file.mimeType.startsWith('video')}
-        <div class="w-full flex justify-center">
-            <!-- svelte-ignore a11y-media-has-caption -->
-            <video
-                src={uploadedFile?.id
-                    ? `${process.env.VITE_API_BASE_URL}/api/static/file/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`
-                    : defaultVideo}
-                class="mt-10 max-h-96 rounded-2xl"
-                controls
-                onerror="this.src='/assets/default/video.png'"
-            />
-        </div>
-    {:else}
-        <Button customStyle={true} className="mt-10" on:click={handleDownload}>
-            <img alt={uploadedFile.title} src={defaultImage} class="max-h-96 rounded-2xl" />
-        </Button>
-    {/if}
+        {:else if uploadedFile.file.mimeType.startsWith('video')}
+            <div class="w-full flex justify-center">
+                <!-- svelte-ignore a11y-media-has-caption -->
+                <video
+                    src={uploadedFile?.id
+                        ? `${process.env.VITE_API_BASE_URL}/api/static/file/${uploadedFile.id}?token=${localStorage.getItem('apiToken')}`
+                        : defaultVideo}
+                    class="mt-10 max-h-96 rounded-2xl"
+                    controls
+                    onerror="this.src='/assets/default/video.png'"
+                />
+            </div>
+        {:else}
+            <Button customStyle={true} className="mt-10" on:click={handleDownload}>
+                <img alt={uploadedFile.title} src={defaultDocument} class="max-h-96 rounded-2xl" />
+            </Button>
+        {/if}
+    </div>
     <Fab horizontal="middle" vertical="bottom" icon="download" on:click={handleDownload} />
 {:else}
     <Title title={$t('file.title')} />
