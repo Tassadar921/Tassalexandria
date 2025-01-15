@@ -10,12 +10,12 @@ export default class BrevoMailService {
             this.apiUrl,
             {
                 sender: {
-                    name: 'Tassalexandrie',
+                    name: 'Tassalexandria',
                     email: env.get('ACCOUNT_SENDER_EMAIL'),
                 },
                 to: [
                     {
-                        name: 'Tassalexandrie User',
+                        name: 'Tassalexandria User',
                         email: user.email,
                     },
                 ],
@@ -40,12 +40,12 @@ export default class BrevoMailService {
             this.apiUrl,
             {
                 sender: {
-                    name: 'Tassalexandrie',
+                    name: 'Tassalexandria',
                     email: env.get('ACCOUNT_SENDER_EMAIL'),
                 },
                 to: [
                     {
-                        name: 'Tassalexandrie User',
+                        name: 'Tassalexandria User',
                         email: email,
                     },
                 ],
