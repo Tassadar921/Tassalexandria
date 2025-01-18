@@ -36,7 +36,7 @@ export default class FileUploadController {
         const foundTags: Tag[] = await this.fileService.getFoundTags(tags);
 
         const inputFile = request.file('file', {
-            size: '5mb',
+            size: '100mb',
             extnames: ['jpg', 'png', 'gif', 'jpeg', 'webp', 'mp3', 'mp4', 'mov', 'txt', 'docx', 'xls', 'xlsx', 'pdf'],
         });
 
@@ -94,7 +94,7 @@ export default class FileUploadController {
             await uploadedFile.save();
         } else if (!file.mimeType.startsWith('image')) {
             const thumbnailFile = request.file('thumbnail', {
-                size: '2mb',
+                size: '5mb',
                 extnames: ['jpg', 'png', 'gif', 'jpeg', 'webp'],
             });
 
