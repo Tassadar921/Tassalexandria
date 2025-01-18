@@ -19,7 +19,7 @@
     const handleSuccess = (event) => {
         console.log(event.detail);
         showToast($t('toast.upload.success'));
-        // navigate(`/file/${event.detail.fileId}`);
+        navigate(`/file/${event.detail.fileId}`);
     };
 
     const handleError = () => {
