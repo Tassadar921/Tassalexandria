@@ -48,6 +48,8 @@ export default class FileUploadController {
             return response.badRequest({ error: "File can't be retrieved: try again" });
         }
 
+        console.log(inputFile.headers);
+
         inputFile.clientName = `${cuid()}-${this.slugifyService.slugify(inputFile.clientName)}`;
         const path = `static/upload/${user.frontId}`;
         await inputFile.move(app.makePath(path));
